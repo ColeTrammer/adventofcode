@@ -1,0 +1,6 @@
+[submodule "adventofcode2022"]
+	path = adventofcode2022
+	url = https://github.com/ColeTrammer/adventofcode2022.git
+[submodule "adventofcode2021"]
+	path = adventofcode2021
+	url = https://github.com/ColeTrammer/adventofcode2021.git
