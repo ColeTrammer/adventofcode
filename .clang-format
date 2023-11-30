@@ -1,0 +1,50 @@
+---
+BasedOnStyle: Webkit
+IndentWidth: 4
+---
+Language: Cpp
+ColumnLimit: 120
+IncludeCategories:
+  - Regex: "<*>"
+    Priority: 1
+  - Regex: '"*.h"'
+    Priority: 4
+  - Regex: "*"
+    Priority: 5
+KeepEmptyLinesAtTheStartOfBlocks: false
+SpaceAfterTemplateKeyword: false
+SpaceAfterCStyleCast: true
+AlignTrailingComments: true
+BreakBeforeInheritanceComma: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+IndentPPDirectives: None
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: false
+  SplitEmptyFunction: false
+IndentCaseLabels: true
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: true
+BreakBeforeBinaryOperators: None
+AlignOperands: true
+AlignAfterOpenBracket: true
+AllowAllArgumentsOnNextLine: true
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLambdasOnASingleLine: Empty
+AlwaysBreakTemplateDeclarations: Yes
+SpaceInEmptyBlock: false
+RequiresClausePosition: OwnLine
+IndentRequiresClause: false
+QualifierAlignment: Custom
+InsertBraces: true
+QualifierOrder: ["constexpr", "static", "inline", "friend", "type", "const", "volatile"]
+WhitespaceSensitiveMacros:
+  [
+    "IRIS_ARCH_INCLUDE",
+    "DIUS_ARCH_PATH",
+    "DIUS_PLATFORM_PATH",
+    "DIUS_ARCH_PLATFORM_PATH",
+    "__CCPP_ARCH_PATH",
+    "__CCPP_PLATFORM_PATH",
+    "__CCPP_ARCH_PLATFORM_PATH",
+  ]

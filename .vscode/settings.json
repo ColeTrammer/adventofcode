@@ -1,0 +1,49 @@
+{
+    "search.exclude": {
+        "**/.git": true,
+        "build/**": true,
+        ".cache/**": true,
+        "/usr/include/**": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "build/**": true,
+        ".cache/**": true,
+        "/usr/include/**": true
+    },
+    "files.associations": {
+        "*.json": "json",
+        "*.code-snippets": "json",
+        ".prettierrc": "json",
+        ".clang-format": "yaml",
+        ".clang-tidy": "yaml",
+        ".clangd": "yaml",
+        "CMakeToolchain*.txt": "cmake"
+    },
+    "cmake.exportCompileCommandsFile": true,
+    "cmake.copyCompileCommands": "${workspaceRoot}/build/compile_commands.json",
+    "cmake.configureOnOpen": true,
+    "cmake.languageSupport.enableFileAPI": true,
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.autoAddFileAssociations": false,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "editor.tabSize": 4,
+    "files.insertFinalNewline": true,
+    "editor.rulers": [120],
+    "rewrap.autoWrap.enabled": true,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+        "editor.tabSize": 2
+    },
+    "[markdown]": {
+        "editor.tabSize": 2
+    },
+    "[cmake]": {
+        "editor.defaultFormatter": "cheshirekow.cmake-format"
+    },
+    "[cmake-cache]": {
+        "editor.defaultFormatter": "cheshirekow.cmake-format"
+    }
+}

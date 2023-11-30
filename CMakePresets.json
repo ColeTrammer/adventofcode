@@ -1,0 +1,153 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 25,
+        "patch": 2
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+                "CMAKE_INSTALL_MESSAGE": "NEVER",
+                "IROS_WarningFlags": "-Wall;-Wextra;-Wpedantic",
+                "IROS_BuildIris": "OFF",
+                "IROS_BuildUserspace": "OFF",
+                "IROS_BuildTests": "OFF",
+                "IROS_BuildTools": "OFF",
+                "IROS_BuildCcpp": "ON",
+                "IROS_UseDiusRuntime": "ON",
+                "IROS_NeverBuildDocs": "ON"
+            }
+        },
+        {
+            "name": "gcc_base",
+            "hidden": true,
+            "cacheVariables": {
+                "IROS_DiagnosticFlags": "-fdiagnostics-color=always;-ffold-simple-inlines"
+            }
+        },
+        {
+            "name": "clang_base",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang-16",
+                "IROS_DiagnosticFlags": "-fcolor-diagnostics;-fconstexpr-steps=10000000;-fsized-deallocation",
+                "IROS_WarningFlags": "-Wall;-Wextra;-Wpedantic"
+            }
+        },
+        {
+            "name": "release_base",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": ["base"]
+        },
+        {
+            "name": "debug_base",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "inherits": ["base"]
+        },
+        {
+            "name": "clang_release_default",
+            "displayName": "Clang Release Default",
+            "description": "release default build using clang",
+            "binaryDir": "${sourceDir}/build/clang/release",
+            "installDir": "${sourceDir}/build/clang/release/install",
+            "toolchainFile": "",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "inherits": ["clang_base", "release_base"]
+        },
+        {
+            "name": "clang_debug_default",
+            "displayName": "Clang Debug Default",
+            "description": "debug default build using clang",
+            "binaryDir": "${sourceDir}/build/clang/debug",
+            "installDir": "${sourceDir}/build/clang/debug/install",
+            "toolchainFile": "",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "inherits": ["clang_base", "debug_base"]
+        },
+        {
+            "name": "gcc_release_default",
+            "displayName": "GCC Release Default",
+            "description": "release default build using gcc",
+            "binaryDir": "${sourceDir}/build/gcc/release",
+            "installDir": "${sourceDir}/build/gcc/release/install",
+            "toolchainFile": "",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "gcc_debug_default",
+            "displayName": "GCC Debug Default",
+            "description": "debug default build using gcc",
+            "binaryDir": "${sourceDir}/build/gcc/debug",
+            "installDir": "${sourceDir}/build/gcc/debug/install",
+            "toolchainFile": "",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "build_base",
+            "hidden": true
+        },
+        {
+            "name": "clang_release_default",
+            "displayName": "Clang Release Default",
+            "description": "release default build using clang",
+            "configurePreset": "clang_release_default",
+            "inherits": ["build_base"]
+        },
+        {
+            "name": "clang_debug_default",
+            "displayName": "Clang Debug Default",
+            "description": "debug default build using clang",
+            "configurePreset": "clang_debug_default",
+            "inherits": ["build_base"]
+        },
+        {
+            "name": "gcc_release_default",
+            "displayName": "GCC Release Default",
+            "description": "release default build using gcc",
+            "configurePreset": "gcc_release_default",
+            "inherits": ["build_base"]
+        },
+        {
+            "name": "gcc_debug_default",
+            "displayName": "GCC Debug Default",
+            "description": "debug default build using gcc",
+            "configurePreset": "gcc_debug_default",
+            "inherits": ["build_base"]
+        },
+        {
+            "name": "gcc_release_default_install",
+            "displayName": "GCC Release Default Install",
+            "description": "release default build using gcc",
+            "configurePreset": "gcc_release_default",
+            "inherits": ["build_base"]
+        },
+        {
+            "name": "gcc_debug_default_install",
+            "displayName": "GCC Debug Default Install",
+            "description": "debug default build using gcc",
+            "configurePreset": "gcc_debug_default",
+            "inherits": ["build_base"]
+        }
+    ]
+}

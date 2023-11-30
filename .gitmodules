@@ -4,3 +4,6 @@
 [submodule "adventofcode2021"]
 	path = adventofcode2021
 	url = https://github.com/ColeTrammer/adventofcode2021.git
+[submodule "iros"]
+	path = iros
+	url = https://github.com/ColeTrammer/iros.git
