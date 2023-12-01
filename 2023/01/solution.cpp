@@ -10,13 +10,7 @@
 AOC_SOLUTION(2023, 1, a, i32) {
     auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
     auto nums = lines | di::transform([](di::StringView string) {
-                    auto filtered = string | di::filter([](auto ch) {
-                                        return ch >= U'0' && ch <= U'9';
-                                    }) |
-                                    di::transform([](auto ch) {
-                                        return c8(ch);
-                                    }) |
-                                    di::to<di::Vector>() | di::to<di::String>();
+                    auto filtered = string | di::filter(U'0'_m - U'9'_m);
                     return (*filtered.front() - U'0') * 10 + (*filtered.back() - U'0');
                 });
     return di::sum(nums);
