@@ -26,15 +26,17 @@ touch "$absolute_problem_dir/test.txt"
 cat > "$absolute_problem_dir/solution.cpp" << __EOF__
 #include <runner/aoc_problem_registry.h>
 
+#include <di/container/interface/empty.h>
+#include <di/function/not_fn.h>
 #include <dius/print.h>
 
 AOC_SOLUTION(${year}, ${day}, a, i32) {
-    auto lines = input | di::split(U'\n');
+    auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
     return 0;
 }
 
 AOC_SOLUTION(${year}, ${day}, b, i32) {
-    auto lines = input | di::split(U'\n');
+    auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
     return 0;
 }
 __EOF__

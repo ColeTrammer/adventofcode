@@ -27,14 +27,14 @@ private:
     di::TreeMap<Key, Function> m_map;
 };
 
-#define AOC_SOLUTION(year, day, part, Ret)                                                      \
-    static Ret solve_##year##_##day##_##part(di::StringView);                                   \
-    static __attribute__((constructor)) void __registersolve_##year##_##day##_##part() {        \
-        aoc::AocProblemRegistry::the().register_solver(                                         \
-            { year, day, "" #part ""_tsv == "a"_tsv ? false : true }, [](di::StringView view) { \
-                auto result = solve_##year##_##day##_##part(view);                              \
-                dius::println("" #year " day " #day " part " #part ": {}"_sv, result);          \
-            });                                                                                 \
-    }                                                                                           \
+#define AOC_SOLUTION(year, day, part, Ret)                                                                             \
+    static Ret solve_##year##_##day##_##part(di::StringView);                                                          \
+    static __attribute__((constructor)) void __registersolve_##year##_##day##_##part() {                               \
+        aoc::AocProblemRegistry::the().register_solver(                                                                \
+            { year, day, "" #part ""_tsv == "a"_tsv ? false : true }, [](di::StringView view) {                        \
+                auto result = solve_##year##_##day##_##part(view);                                                     \
+                dius::println("" #year " day {} part " #part ": {}"_sv, di::parse_unchecked<i32>(""_sv #day), result); \
+            });                                                                                                        \
+    }                                                                                                                  \
     static Ret solve_##year##_##day##_##part(di::StringView input)
 }
