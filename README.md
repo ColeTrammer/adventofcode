@@ -6,10 +6,11 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 | Year | Language | Number of Problems Solved |
 | ---- | -------- | ------------------------- |
+| 2019 | C++      | 1/25                      |
 | 2020 | C++      | 3/25                      |
 | 2021 | Rust     | 8/25                      |
 | 2022 | Rust     | 25/25                     |
-| 2023 | C++      | 0/25                      |
+| 2023 | C++      | 1/25                      |
 
 ## Running the Solutions
 
