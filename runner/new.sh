@@ -30,6 +30,10 @@ cat > "$absolute_problem_dir/solution.cpp" << __EOF__
 #include <di/function/not_fn.h>
 #include <dius/print.h>
 
+using namespace di;
+using namespace dius;
+
+
 AOC_SOLUTION(${year}, ${day}, a, i32) {
     auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
     return 0;
