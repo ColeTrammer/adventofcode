@@ -6,13 +6,14 @@
 #include <di/container/interface/empty.h>
 #include <di/function/not_fn.h>
 #include <dius/print.h>
+#include <runner/aliases.h>
 
 using namespace di;
 using namespace dius;
 
 AOC_SOLUTION(2023, 1, a, i32) {
     auto lines = input | split('\n') | filter(not_fn(empty));
-    auto nums = lines | transform([](TransparentStringView string) {
+    auto nums = lines | transform([](Tsv string) {
                     auto filtered = string | filter('0'_mc - '9'_mc);
                     return (*filtered.front() - '0') * 10 + (*filtered.back() - '0');
                 });
@@ -22,14 +23,14 @@ AOC_SOLUTION(2023, 1, a, i32) {
 AOC_SOLUTION(2023, 1, b, i32) {
     auto lines = input | split('\n') | filter(not_fn(empty));
 
-    auto get_num = [](TransparentStringView line) {
+    auto get_num = [](Tsv line) {
         auto nums = Array {
             "one"_tsv, "two"_tsv, "three"_tsv, "four"_tsv, "five"_tsv, "six"_tsv, "seven"_tsv, "eight"_tsv, "nine"_tsv,
         };
 
         auto digits = Vector<i32> {};
         for (auto it = line.begin(); it != line.end(); ++it) {
-            auto part = TransparentStringView(it, line.end());
+            auto part = Tsv(it, line.end());
             for (auto [i, num] : enumerate(nums)) {
                 if (starts_with(part, num)) {
                     digits.push_back(i + 1);

@@ -29,6 +29,7 @@ cat > "$absolute_problem_dir/solution.cpp" << __EOF__
 #include <di/container/interface/empty.h>
 #include <di/function/not_fn.h>
 #include <dius/print.h>
+#include <runner/aliases.h>
 
 using namespace di;
 using namespace dius;
