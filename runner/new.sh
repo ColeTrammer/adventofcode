@@ -36,13 +36,23 @@ using namespace dius;
 
 
 AOC_SOLUTION(${year}, ${day}, a, i32) {
-    auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
-    return 0;
+    auto lines = input | split('\n') | filter(not_fn(empty));
+
+    auto sum = 0;
+    for (auto line : lines) {
+
+    }
+    return sum;
 }
 
 AOC_SOLUTION(${year}, ${day}, b, i32) {
-    auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
-    return 0;
+    auto lines = input | split('\n') | filter(not_fn(empty));
+
+    auto sum = 0;
+    for (auto line : lines) {
+
+    }
+    return sum;
 }
 __EOF__
 
