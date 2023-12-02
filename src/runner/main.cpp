@@ -38,14 +38,14 @@ auto read_to_string(di::PathView path) -> di::Result<di::TransparentString> {
 }
 
 di::Result<void> main(Args& args) {
-    auto prefix = TRY(di::present("{}/{:02}"_sv, args.year, args.day));
-    auto prefix_as_transparent_string = prefix | di::transform([](c32 code_point) {
-                                            return static_cast<char>(code_point);
-                                        }) |
-                                        di::to<di::Vector>() | di::to<di::TransparentString>();
-    auto prefix_as_path = di::Path { di::move(prefix_as_transparent_string) };
+    auto default_path_string =
+        TRY(di::present("input/{}/{}_{:02}.txt"_sv, args.year, args.test ? "test"_sv : "input"_sv, args.day));
+    auto default_path_transparent_string = default_path_string | di::transform([](c32 code_point) {
+                                               return static_cast<char>(code_point);
+                                           }) |
+                                           di::to<di::Vector>() | di::to<di::TransparentString>();
+    auto default_path = di::Path { di::move(default_path_transparent_string) };
 
-    auto default_path = di::move(prefix_as_path) / (args.test ? "test.txt"_pv : "input.txt"_pv);
     auto path = args.input.value_or(default_path);
     auto string = TRY(read_to_string(path) | di::if_error([&](auto&& error) {
                           dius::eprintln("Failed to read input file '{}': {}"_sv, path.data(), error.message());
