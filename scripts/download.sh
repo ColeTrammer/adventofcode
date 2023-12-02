@@ -19,10 +19,12 @@ project_root=$(realpath "$script_dir/..")
 year=$1
 day=$2
 
-problem_dir=`printf "%s/%02d" $year $day`
-absolute_problem_dir="$project_root/$problem_dir"
+input_dir="input/$year"
+file_name=`printf "input_%02d.txt" $day`
+output_path="$project_root/$input_dir/$file_name"
+mkdir -p "$project_root/$input_dir"
 
 url="https://adventofcode.com/$year/day/$day/input"
-echo "Downloading input from '$url' to '$absolute_problem_dir/input.txt'..."
 
-curl -s -b "session=$AOC_SESSION" "$url" > "$absolute_problem_dir/input.txt"
+echo "Downloading input from '$url' to '$output_path'..."
+curl -s -b "session=$AOC_SESSION" "$url" > "$output_path"
