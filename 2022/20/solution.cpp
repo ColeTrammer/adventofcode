@@ -3,7 +3,7 @@
 #include <di/container/linked/linked_list.h>
 
 AOC_SOLUTION(2022, 20, a, i32) {
-    auto numbers = input | di::split(U'\n') | di::transform(di::parse_unchecked<i32>) | di::to<di::LinkedList>();
+    auto numbers = input | di::split('\n') | di::transform(di::parse_unchecked<i32>) | di::to<di::LinkedList>();
 
     auto cycled = numbers | di::cycle;
 
@@ -38,7 +38,7 @@ AOC_SOLUTION(2022, 20, a, i32) {
 }
 
 AOC_SOLUTION(2022, 20, b, i64) {
-    auto numbers = input | di::split(U'\n') | di::transform(di::parse_unchecked<i64>) | di::transform([](auto i) {
+    auto numbers = input | di::split('\n') | di::transform(di::parse_unchecked<i64>) | di::transform([](auto i) {
                        return i * 811589153;
                    }) |
                    di::to<di::LinkedList>();

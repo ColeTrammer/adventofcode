@@ -5,7 +5,7 @@
 #include <dius/print.h>
 
 AOC_SOLUTION(2019, 01, a, i32) {
-    auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
+    auto lines = input | di::split('\n') | di::filter(di::not_fn(di::empty));
     auto nums = lines | di::transform(di::parse_unchecked<i32>);
     return nums | di::transform([](i32 x) {
                return x / 3 - 2;
@@ -14,7 +14,7 @@ AOC_SOLUTION(2019, 01, a, i32) {
 }
 
 AOC_SOLUTION(2019, 01, b, i32) {
-    auto lines = input | di::split(U'\n') | di::filter(di::not_fn(di::empty));
+    auto lines = input | di::split('\n') | di::filter(di::not_fn(di::empty));
     auto nums = lines | di::transform(di::parse_unchecked<i32>);
 
     return nums | di::transform([](i32 x) {

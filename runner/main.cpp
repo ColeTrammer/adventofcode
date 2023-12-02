@@ -3,7 +3,10 @@
 #include <di/container/string/string.h>
 #include <di/container/string/transparent_encoding.h>
 #include <di/format/present.h>
+#include <di/io/read_all.h>
+#include <di/types/byte.h>
 #include <dius/main.h>
+#include <dius/sync_file.h>
 #include <runner/aoc_problem_registry.h>
 
 namespace aoc {
@@ -24,6 +27,16 @@ struct Args {
     }
 };
 
+auto read_to_string(di::PathView path) -> di::Result<di::TransparentString> {
+    auto file = TRY(dius::open_sync(path, dius::OpenMode::Readonly));
+    auto bytes = TRY(di::read_all(file));
+
+    return bytes | di::transform([](byte byte) {
+               return di::to_integer<char>(byte);
+           }) |
+           di::to<di::Vector>() | di::to<di::TransparentString>();
+}
+
 di::Result<void> main(Args& args) {
     auto prefix = TRY(di::present("{}/{:02}"_sv, args.year, args.day));
     auto prefix_as_transparent_string = prefix | di::transform([](c32 code_point) {
@@ -34,7 +47,7 @@ di::Result<void> main(Args& args) {
 
     auto default_path = di::move(prefix_as_path) / (args.test ? "test.txt"_pv : "input.txt"_pv);
     auto path = args.input.value_or(default_path);
-    auto string = TRY(dius::read_to_string(path) | di::if_error([&](auto&& error) {
+    auto string = TRY(read_to_string(path) | di::if_error([&](auto&& error) {
                           dius::eprintln("Failed to read input file '{}': {}"_sv, path.data(), error.message());
                       }));
 

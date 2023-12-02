@@ -11,32 +11,32 @@ using namespace di;
 using namespace dius;
 
 AOC_SOLUTION(2023, 1, a, i32) {
-    auto lines = input | split(U'\n') | filter(not_fn(empty));
-    auto nums = lines | transform([](StringView string) {
-                    auto filtered = string | filter(U'0'_m - U'9'_m);
-                    return (*filtered.front() - U'0') * 10 + (*filtered.back() - U'0');
+    auto lines = input | split('\n') | filter(not_fn(empty));
+    auto nums = lines | transform([](TransparentStringView string) {
+                    auto filtered = string | filter('0'_mc - '9'_mc);
+                    return (*filtered.front() - '0') * 10 + (*filtered.back() - '0');
                 });
     return sum(nums);
 }
 
 AOC_SOLUTION(2023, 1, b, i32) {
-    auto lines = input | split(U'\n') | filter(not_fn(empty));
+    auto lines = input | split('\n') | filter(not_fn(empty));
 
-    auto get_num = [](StringView line) {
+    auto get_num = [](TransparentStringView line) {
         auto nums = Array {
-            "one"_sv, "two"_sv, "three"_sv, "four"_sv, "five"_sv, "six"_sv, "seven"_sv, "eight"_sv, "nine"_sv,
+            "one"_tsv, "two"_tsv, "three"_tsv, "four"_tsv, "five"_tsv, "six"_tsv, "seven"_tsv, "eight"_tsv, "nine"_tsv,
         };
 
         auto digits = Vector<i32> {};
         for (auto it = line.begin(); it != line.end(); ++it) {
-            auto part = reconstruct(it, line.end());
+            auto part = TransparentStringView(it, line.end());
             for (auto [i, num] : enumerate(nums)) {
                 if (starts_with(part, num)) {
                     digits.push_back(i + 1);
                 }
             }
-            if (*part.front() >= U'0' && *part.front() <= U'9') {
-                digits.push_back(*part.front() - U'0');
+            if (*part.front() >= '0' && *part.front() <= '9') {
+                digits.push_back(*part.front() - '0');
             }
         }
 
