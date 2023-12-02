@@ -50,6 +50,10 @@ di::Result<void> main(Args& args) {
     auto string = TRY(read_to_string(path) | di::if_error([&](auto&& error) {
                           dius::eprintln("Failed to read input file '{}': {}"_sv, path.data(), error.message());
                       }));
+    auto view = string.view();
+    while (view.ends_with('\n')) {
+        view = view.substr(view.begin(), view.end() - 1);
+    }
 
     auto solver = AocProblemRegistry::the().lookup({ args.year, args.day, args.part_b });
     if (!solver) {
@@ -57,7 +61,7 @@ di::Result<void> main(Args& args) {
         return di::Unexpected(di::BasicError::InvalidArgument);
     }
 
-    (*solver)(string);
+    (*solver)(view);
     return {};
 }
 }

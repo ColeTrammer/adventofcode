@@ -1,0 +1,36 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: $0"
+    echo "NOTE: The AOC_SESSION environment variable must be set to your session cookie."
+    exit 1
+}
+
+if [ -z "$AOC_SESSION" ]; then
+    usage
+fi
+
+script_dir=$(dirname "$0")
+project_root=$(realpath "$script_dir/..")
+
+year=$(date +%Y)
+today=$(date +%d)
+
+next_day=$(($today + 1))
+
+"$script_dir/new.sh" "$year" "$next_day"
+
+while true;
+do
+    hour=$(date +%H)
+    minute=$(date +%M)
+    second=$(date +%S)
+
+    if [ "$hour" -eq 12 ] && [ "$minute" -ge 34 ] && [ "$second" -ge 0 ]; then
+        "$script_dir/open.sh" "$year" "$next_day"
+        "$script_dir/download.sh" "$year" "$next_day"
+        break
+    fi
+
+    sleep 1
+done

@@ -37,7 +37,7 @@ using namespace dius;
 
 
 AOC_SOLUTION(${year}, ${day}, a, i32) {
-    auto lines = input | split('\n') | filter(not_fn(empty));
+    auto lines = input | split('\n');
 
     auto sum = 0;
     for (auto line : lines) {
@@ -47,7 +47,7 @@ AOC_SOLUTION(${year}, ${day}, a, i32) {
 }
 
 AOC_SOLUTION(${year}, ${day}, b, i32) {
-    auto lines = input | split('\n') | filter(not_fn(empty));
+    auto lines = input | split('\n');
 
     auto sum = 0;
     for (auto line : lines) {
@@ -73,3 +73,12 @@ echo "$problem_name" >> "$project_root/src/problem_list.txt"
 cp "$project_root/src/problem_list.txt" /tmp/problem_list.txt
 sort /tmp/problem_list.txt | uniq > "$project_root/src/problem_list.txt"
 rm -f /tmp/problem_list.txt
+
+echo "Opening $project_root/$source_file..."
+code "$project_root/$source_file"
+
+echo "Opening $project_root/$input_dir/$input_file..."
+code "$project_root/$input_dir/$input_file"
+
+echo "Opening $project_root/$input_dir/$test_file..."
+code "$project_root/$input_dir/$test_file"
