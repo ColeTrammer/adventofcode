@@ -26,7 +26,7 @@ do
     minute=$(date +%M)
     second=$(date +%S)
 
-    if [ "$hour" -eq 12 ] && [ "$minute" -ge 34 ] && [ "$second" -ge 0 ]; then
+    if [ "$hour" -eq 21 ] && [ "$minute" -ge 0 ] && [ "$second" -ge 0 ]; then
         "$script_dir/open.sh" "$year" "$next_day"
         "$script_dir/download.sh" "$year" "$next_day"
         break
