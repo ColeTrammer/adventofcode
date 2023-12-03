@@ -21,6 +21,10 @@ while read -r line; do
     part=$(echo "$line" | cut -d' ' -f 5 | tr -d ':')
     answer=$(echo "$line" | cut -d' ' -f 6)
 
+    if [ -z "$year" ] || [ -z "$day" ] || [ -z "$part" ] || [ -z "$answer" ]; then
+        continue
+    fi
+
     part_number=1
     if [ "$part" = "b" ]; then
         part_number=2

@@ -62,16 +62,10 @@ with the submodules, use the following command:
 git clone --recurse-submodules https://github.com/ColeTrammer/adventofcode.git
 ```
 
-### 2023
+### C++ Code Organization
 
-The 2023 solutions are written in C++ using my own custom libraries, which are part of my from own from-scratch
-[OS](https://github.com/ColeTrammer/iros). In fact, the built solutions have no external (not even standard library)
-dependencies. The library itself only works on Linux x86_64, as it implements the Linux ABI for system calls and program
-startup.
-
-The source code is located in the `2023` directory. Each day has a solution file `solution.cpp`, in a directory
-of the form `01`, `02`, etc. Additionally, there are some C++ solution to 2022 problems in the `2022` directory. To
-compile and run the solutions, use the following commands:
+The source code is located in the `src` directory. Each day has a solution file `$year/$day.cpp`, in a directory of the
+form `01`, `02`, etc.
 
 ```bash
 cmake --preset clang_release_default
@@ -84,9 +78,9 @@ export YEAR=2023
 aoc -y $YEAR -d $DAY
 ```
 
-The input files are located in the `$YEAR/$DAY/input.txt` file. The solution by default reads a file named
-`$YEAR/$DAY/input.txt` in the current working directory, but can be changed by passing the path to the input file as a
-command line argument:
+The input files are located in the `input` directory. The solution by default reads a file named
+`input/$YEAR/input_$DAY.txt` in the current working directory, but can be changed by passing the path to the input file
+as a command line argument:
 
 ```bash
 aoc -y $YEAR -d $DAY -i input.txt
@@ -98,15 +92,29 @@ To get the solution to part b, pass the `-b` flag:
 aoc -y $YEAR -d $DAY -b
 ```
 
-To run against the problem provided sample input (named `test.txt`), pass the `-t` flag:
+To run against the problem provided sample input (named `$YEAR/test_$DAY.txt`), pass the `-t` flag:
 
 ```bash
 aoc -y $YEAR -d $DAY -t
 ```
 
-### 2022
+### Utility Scripts
 
-The solutions for 2022 are located in the `adventofcode2022` directory. Each day has its own rust project, named
+The `scripts` directory contains a number of utility scripts for interacting with the advent of code website. The
+scripts require an environment variable named `AOC_SESSION` to be set to the value of the `session` cookie on the advent
+of code website. The scripts perform the following functions:
+
+| Script Name   | Description                                                                                    |
+| ------------- | ---------------------------------------------------------------------------------------------- |
+| `download.sh` | Downloads the input file for the given year and day.                                           |
+| `new.sh`      | Add source code and input stubs for solving a new problem day.                                 |
+| `open.sh`     | Opens the advent of code website for the given year, day and part in the default browser.      |
+| `start.sh`    | Calls `new.sh`, and then `open.sh` and `download.sh` as soon as the problem becomes available. |
+| `submit.sh`   | Submits the solution for the given year and day. The solution is provided on stdin.            |
+
+### 2022 Past Solutions
+
+The rust solutions for 2022 are located in the `adventofcode2022` directory. Each day has its own rust project, named
 `day01`, `day02`, etc. To compile and run a solution, use the following commands:
 
 ```bash
@@ -136,9 +144,9 @@ To run against the problem provided sample input (named `test.txt`), pass the `-
 cargo run --release -- --test
 ```
 
-### 2021
+### 2021 Past Solutions
 
-The solutions for 2021 are located in the `adventofcode2021` directory. Each day has its own rust project, named `day1`,
+The rust solutions for 2021 are located in the `adventofcode2021` directory. Each day has its own rust project, named `day1`,
 `day2`, etc. To compile and run a solution, use the following commands:
 
 ```bash
@@ -151,9 +159,9 @@ cargo run --release
 The input files are located in the `adventofcode2021/day$DAY/input.txt` file. The solutions are hard-coded to read a
 file named `input.txt` in the current working directory.
 
-### 2020
+### 2020 Past Solutions
 
-The solutions for 2020 are located in the `adventofcode2020` directory. The solutions files are named `1.cpp`, `2.cpp`,
+The C++ solutions for 2020 are located in the `adventofcode2020` directory. The solutions files are named `1.cpp`, `2.cpp`,
 etc. To compile and run a solution, use the following commands:
 
 ```bash
