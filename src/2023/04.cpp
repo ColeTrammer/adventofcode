@@ -18,17 +18,17 @@ AOC_SOLUTION(2023, 4, a, i32) {
 
     auto sum = 0;
     for (auto [row, line] : enumerate(lines)) {
-        for (auto [_, nums] : split(line, ':') | pairwise) {
-            for (auto [winning, mine] : split(nums, '|') | pairwise) {
-                auto w = split(trim(winning), ' ') | filter(not_fn(empty)) | transform(uparse_int) | to<TreeSet>();
-                auto m = split(trim(mine), ' ') | filter(not_fn(empty)) | transform(uparse_int) | to<TreeSet>();
+        auto [_, nums] = split_two(line, ':');
+        auto [winning, mine] = split_two(nums, '|');
 
-                w.intersect(m);
-                auto matches = w.size();
-                if (matches > 0) {
-                    sum += 1 << (matches - 1);
-                }
-            }
+        auto w = all_nums(winning, ' ') | to<TreeSet>();
+        auto m = all_nums(mine, ' ') | to<TreeSet>();
+
+        w &= m;
+
+        auto matches = w.size();
+        if (matches > 0) {
+            sum += 1 << (matches - 1);
         }
     }
     return sum;
@@ -37,20 +37,19 @@ AOC_SOLUTION(2023, 4, a, i32) {
 AOC_SOLUTION(2023, 4, b, i32) {
     auto lines = input | split('\n') | to<Vector>();
 
-    auto counts = Vector<i32> {};
-    counts.resize(lines.size(), 1);
+    auto counts = repeat(1, lines.size()) | to<Vector>();
     for (auto [row, line] : enumerate(lines)) {
-        for (auto [_, nums] : split(line, ':') | pairwise) {
-            for (auto [winning, mine] : split(nums, '|') | pairwise) {
-                auto w = split(trim(winning), ' ') | filter(not_fn(empty)) | transform(uparse_int) | to<TreeSet>();
-                auto m = split(trim(mine), ' ') | filter(not_fn(empty)) | transform(uparse_int) | to<TreeSet>();
+        auto [_, nums] = split_two(line, ':');
+        auto [winning, mine] = split_two(nums, '|');
 
-                w.intersect(m);
-                auto matches = w.size();
-                for (auto x = row + 1; x < lines.size() && x < row + 1 + matches; x++) {
-                    counts[x] += counts[row];
-                }
-            }
+        auto w = all_nums(winning, ' ') | to<TreeSet>();
+        auto m = all_nums(mine, ' ') | to<TreeSet>();
+
+        w &= m;
+
+        auto matches = w.size();
+        for (usize i = 1; i <= matches; i++) {
+            counts[row + i] += counts[row];
         }
     }
     return sum(counts);

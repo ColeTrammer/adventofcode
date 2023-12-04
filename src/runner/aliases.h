@@ -1,6 +1,8 @@
 #pragma once
 
 #include <di/container/vector/vector.h>
+#include <di/container/view/pairwise.h>
+#include <di/function/curry_back.h>
 #include <di/function/invoke.h>
 #include <di/function/pipeable.h>
 #include <di/function/piped.h>
@@ -207,3 +209,35 @@ constexpr inline auto uparse_i = aoc::detail::ParseUncheckedIFunction<T> {};
 
 constexpr inline auto parse_int = parse_i<i32>;
 constexpr inline auto uparse_int = uparse_i<i32>;
+
+namespace aoc::detail {
+struct SplitTwo {
+    auto operator()(auto string, auto split_on) const {
+        auto pairs = di::split(string, split_on) | di::pairwise;
+        return *pairs.front();
+    }
+};
+}
+
+constexpr inline auto split_two = di::curry_back(aoc::detail::SplitTwo {}, di::c_<2zu>);
+
+namespace aoc::detail {
+struct AllNums {
+    template<typename T>
+    auto operator()(T&& container) const {
+        return di::forward<T>(container) | di::transform(parse_int) | di::filter([](auto const& value) {
+                   return value.has_value();
+               }) |
+               di::transform([](auto const& value) {
+                   return *value;
+               });
+    }
+
+    template<typename T>
+    auto operator()(T&& container, auto split_on) const {
+        return (*this)(di::forward<T>(container) | di::split(split_on));
+    }
+};
+}
+
+constexpr inline auto all_nums = di::curry_back(aoc::detail::AllNums {}, di::c_<2zu>);
