@@ -28,6 +28,10 @@ cat > "$project_root/$source_file" << __EOF__
 #include <runner/aoc_problem_registry.h>
 
 #include <di/container/interface/empty.h>
+#include <di/container/tree/tree_map.h>
+#include <di/container/tree/tree_multimap.h>
+#include <di/container/tree/tree_multiset.h>
+#include <di/container/tree/tree_set.h>
 #include <di/function/not_fn.h>
 #include <dius/print.h>
 #include <runner/aliases.h>
@@ -35,24 +39,19 @@ cat > "$project_root/$source_file" << __EOF__
 using namespace di;
 using namespace dius;
 
-
-AOC_SOLUTION(${year}, ${day}, a, i32) {
+AOC_SOLUTION(2023, 4, a, i32) {
     auto lines = input | split('\n') | to<Vector>();
 
     auto sum = 0;
-    for (auto line : lines) {
-
-    }
+    for (auto [row, line] : enumerate(lines)) {}
     return sum;
 }
 
-AOC_SOLUTION(${year}, ${day}, b, i32) {
+AOC_SOLUTION(2023, 4, b, i32) {
     auto lines = input | split('\n') | to<Vector>();
 
     auto sum = 0;
-    for (auto line : lines) {
-
-    }
+    for (auto [row, line] : enumerate(lines)) {}
     return sum;
 }
 __EOF__
