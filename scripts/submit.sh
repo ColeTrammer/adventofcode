@@ -17,11 +17,13 @@ project_root=$(realpath "$script_dir/..")
 
 while read -r line; do
     year=$(echo "$line" | cut -d' ' -f 1)
+    day_text=$(echo "$line" | cut -d' ' -f 2)
     day=$(echo "$line" | cut -d' ' -f 3)
+    part_text=$(echo "$line" | cut -d' ' -f 4)
     part=$(echo "$line" | cut -d' ' -f 5 | tr -d ':')
     answer=$(echo "$line" | cut -d' ' -f 6)
 
-    if [ -z "$year" ] || [ -z "$day" ] || [ -z "$part" ] || [ -z "$answer" ]; then
+    if [ -z "$year" ] || [ day_text != 'day' ] || [ -z "$day" ] || [ part_text  != 'part'] || [ -z "$part" ] || [ -z "$answer" ]; then
         continue
     fi
 

@@ -27,17 +27,19 @@
             "name": "gcc_base",
             "hidden": true,
             "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
                 "IROS_DiagnosticFlags": "-fdiagnostics-color=always;-ffold-simple-inlines"
-            }
+            },
+            "inherits": ["base"]
         },
         {
             "name": "clang_base",
             "hidden": true,
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "clang-16",
-                "IROS_DiagnosticFlags": "-fcolor-diagnostics;-fconstexpr-steps=10000000;-fsized-deallocation",
-                "IROS_WarningFlags": "-Wall;-Wextra;-Wpedantic"
-            }
+                "IROS_DiagnosticFlags": "-fcolor-diagnostics;-fconstexpr-steps=10000000;-fsized-deallocation"
+            },
+            "inherits": ["base"]
         },
         {
             "name": "release_base",
@@ -88,7 +90,8 @@
             "toolchainFile": "",
             "cacheVariables": {
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-            }
+            },
+            "inherits": ["gcc_base", "release_base"]
         },
         {
             "name": "gcc_debug_default",
@@ -99,7 +102,8 @@
             "toolchainFile": "",
             "cacheVariables": {
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-            }
+            },
+            "inherits": ["gcc_base", "debug_base"]
         }
     ],
     "buildPresets": [
