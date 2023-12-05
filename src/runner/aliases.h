@@ -222,10 +222,11 @@ struct SplitTwo {
 constexpr inline auto split_two = di::curry_back(aoc::detail::SplitTwo {}, di::c_<2zu>);
 
 namespace aoc::detail {
+template<typename I>
 struct AllNums {
     template<typename T>
     auto operator()(T&& container) const {
-        return di::forward<T>(container) | di::transform(parse_int) | di::filter([](auto const& value) {
+        return di::forward<T>(container) | di::transform(parse_i<I>) | di::filter([](auto const& value) {
                    return value.has_value();
                }) |
                di::transform([](auto const& value) {
@@ -240,4 +241,7 @@ struct AllNums {
 };
 }
 
-constexpr inline auto all_nums = di::curry_back(aoc::detail::AllNums {}, di::c_<2zu>);
+constexpr inline auto all_nums = di::curry_back(aoc::detail::AllNums<int> {}, di::c_<2zu>);
+
+template<typename I>
+constexpr inline auto all_nums_i = di::curry_back(aoc::detail::AllNums<I> {}, di::c_<2zu>);
