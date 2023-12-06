@@ -7,6 +7,7 @@
 #include <di/function/pipeable.h>
 #include <di/function/piped.h>
 #include <di/meta/language.h>
+#include <di/util/to_owned.h>
 #include <dius/print.h>
 #include <runner/helpful_includes.h>
 
@@ -224,17 +225,33 @@ struct SplitTwo {
 constexpr inline auto split_two = di::curry_back(aoc::detail::SplitTwo {}, di::c_<2zu>);
 
 namespace aoc::detail {
+struct SplitV {
+    template<typename T, typename U>
+    constexpr auto operator()(T&& container, U&& split_on) const {
+        return di::split(di::forward<T>(container), di::forward<U>(split_on)) | di::transform(di::to_owned) |
+               di::to<di::Vector>();
+    }
+};
+}
+
+constexpr inline auto splitv = di::curry_back(aoc::detail::SplitV {}, di::c_<2zu>);
+
+namespace aoc::detail {
 template<typename I>
 struct AllNums {
     template<typename T>
     auto operator()(T&& container) const {
-        return di::forward<T>(container) | di::transform(parse_i<I>) | di::filter([](auto const& value) {
-                   return value.has_value();
-               }) |
-               di::transform([](auto const& value) {
-                   return *value;
-               }) |
-               di::to<di::Vector>();
+        if constexpr (!di::concepts::DecaysTo<T, Tsv> && !di::concepts::DecaysTo<T, Ts>) {
+            return di::forward<T>(container) | di::transform(parse_i<I>) | di::filter([](auto const& value) {
+                       return value.has_value();
+                   }) |
+                   di::transform([](auto const& value) {
+                       return *value;
+                   }) |
+                   di::to<di::Vector>();
+        } else {
+            return (*this)(di::forward<T>(container), ' ');
+        }
     }
 
     template<typename T>

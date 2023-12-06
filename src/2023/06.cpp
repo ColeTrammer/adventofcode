@@ -17,12 +17,10 @@ using namespace di;
 using namespace dius;
 
 AOC_SOLUTION(2023, 6, a, i32) {
-    auto [timess, distancess] = split_two(input, '\n');
-    auto [_, timesl] = split_two(timess, ':');
-    auto [__, distancesl] = split_two(distancess, ':');
+    auto lines = splitv(input, '\n');
 
-    auto times = all_nums(timesl, ' ');
-    auto distances = all_nums(distancesl, ' ');
+    auto times = all_nums(lines[0]);
+    auto distances = all_nums(lines[1]);
 
     return zip_transform(
                [&](auto time, auto d) {
@@ -35,12 +33,10 @@ AOC_SOLUTION(2023, 6, a, i32) {
 }
 
 AOC_SOLUTION(2023, 6, b, i32) {
-    auto [timess, distancess] = split_two(input, '\n');
-    auto [_, timesl] = split_two(timess, ':');
-    auto [__, distancesl] = split_two(distancess, ':');
+    auto lines = splitv(input, '\n');
 
-    auto time = timesl | filter(~' '_mc) | uparse_i<i64>;
-    auto d = distancesl | filter(~' '_mc) | uparse_i<i64>;
+    auto time = lines[0] | filter('0'_mc - '9'_mc) | uparse_i<i64>;
+    auto d = lines[1] | filter('0'_mc - '9'_mc) | uparse_i<i64>;
 
     return count_if(range(time), [&](auto t) {
         return t * (time - t) > d;
