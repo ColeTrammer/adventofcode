@@ -185,18 +185,20 @@ constexpr inline auto proj = aoc::detail::ProjFunction {};
 
 namespace aoc::detail {
 template<di::concepts::Integral T>
-struct ParseIFunction {
+struct ParseIFunction : di::function::pipeline::EnablePipeline {
     template<typename U>
     constexpr auto operator()(U&& input) const {
-        return di::parser::parse<T>(di::forward<U>(input) | di::to<di::Vector>() | di::to<Ts>()).optional_value();
+        auto string = di::forward<U>(input) | di::to<di::Vector>() | di::to<Ts>();
+        return di::parser::parse<T>(string.view()).optional_value();
     }
 };
 
 template<di::concepts::Integral T>
-struct ParseUncheckedIFunction {
+struct ParseUncheckedIFunction : di::function::pipeline::EnablePipeline {
     template<typename U>
     constexpr auto operator()(U&& input) const {
-        return di::parser::parse_unchecked<T>(di::forward<U>(input) | di::to<di::Vector>() | di::to<Ts>());
+        auto string = di::forward<U>(input) | di::to<di::Vector>() | di::to<Ts>();
+        return di::parser::parse_unchecked<T>(string);
     }
 };
 }
@@ -231,7 +233,8 @@ struct AllNums {
                }) |
                di::transform([](auto const& value) {
                    return *value;
-               });
+               }) |
+               di::to<di::Vector>();
     }
 
     template<typename T>

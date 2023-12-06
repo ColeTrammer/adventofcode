@@ -33,6 +33,8 @@ cat > "$project_root/$source_file" << __EOF__
 #include <di/container/tree/tree_multiset.h>
 #include <di/container/tree/tree_set.h>
 #include <di/function/not_fn.h>
+#include <di/container/view/zip_transform.h>
+#include <di/container/view/zip.h>
 #include <dius/print.h>
 #include <runner/aliases.h>
 
