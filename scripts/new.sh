@@ -42,7 +42,7 @@ using namespace di;
 using namespace dius;
 
 AOC_SOLUTION($year, $day, a, i32) {
-    auto lines = input | split('\n') | to<Vector>();
+    auto lines = input | splitv('\n');
 
     auto sum = 0;
     for (auto [row, line] : enumerate(lines)) {}
@@ -50,7 +50,7 @@ AOC_SOLUTION($year, $day, a, i32) {
 }
 
 AOC_SOLUTION($year, $day, b, i32) {
-    auto lines = input | split('\n') | to<Vector>();
+    auto lines = input | splitv('\n');
 
     auto sum = 0;
     for (auto [row, line] : enumerate(lines)) {}
