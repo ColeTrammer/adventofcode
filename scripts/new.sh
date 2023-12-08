@@ -41,7 +41,7 @@ cat > "$project_root/$source_file" << __EOF__
 using namespace di;
 using namespace dius;
 
-AOC_SOLUTION($year, $day, a, i32) {
+AOC_SOLUTION($year, $day, a, i64) {
     auto lines = input | splitv('\n');
 
     auto sum = 0;
@@ -49,7 +49,7 @@ AOC_SOLUTION($year, $day, a, i32) {
     return sum;
 }
 
-AOC_SOLUTION($year, $day, b, i32) {
+AOC_SOLUTION($year, $day, b, i64) {
     auto lines = input | splitv('\n');
 
     auto sum = 0;
