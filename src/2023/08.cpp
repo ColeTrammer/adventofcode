@@ -1,3 +1,4 @@
+#include <di/container/algorithm/fold_left_first.h>
 #include <di/container/algorithm/sort.h>
 #include <di/function/compare_backwards.h>
 #include <di/math/abs_unsigned.h>
@@ -93,9 +94,5 @@ AOC_SOLUTION(2023, 8, b, isize) {
         results.push_back(sum);
     }
 
-    auto steps = 1zu;
-    for (auto result : results) {
-        steps = lcm(result, steps);
-    }
-    return steps;
+    return *fold_left_first(results, lcm);
 }
