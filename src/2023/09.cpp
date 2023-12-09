@@ -1,3 +1,4 @@
+#include <di/function/minus.h>
 #include <runner/aoc_problem_registry.h>
 
 #include <di/container/interface/empty.h>
@@ -26,11 +27,7 @@ AOC_SOLUTION(2023, 9, a, i64) {
 
         while (!all_of(*diffs.back(), equal(0))) {
             auto& ns = *diffs.back();
-            auto nd = Vector<i32> {};
-            for (usize i = 0; i < ns.size() - 1; i++) {
-                nd.push_back(ns[i + 1] - ns[i]);
-            }
-            diffs.push_back(di::move(nd));
+            diffs.push_back(ns | pairwise_transform(minus) | to<Vector>());
         }
 
         sum += di::sum(diffs | transform([](auto& v) {
@@ -52,11 +49,7 @@ AOC_SOLUTION(2023, 9, b, i64) {
 
         while (!all_of(*diffs.back(), equal(0))) {
             auto& ns = *diffs.back();
-            auto nd = Vector<i32> {};
-            for (usize i = 0; i < ns.size() - 1; i++) {
-                nd.push_back(ns[i + 1] - ns[i]);
-            }
-            diffs.push_back(di::move(nd));
+            diffs.push_back(ns | pairwise_transform(minus) | to<Vector>());
         }
 
         auto res = 0;
