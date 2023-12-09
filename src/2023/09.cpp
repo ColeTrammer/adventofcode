@@ -27,7 +27,7 @@ AOC_SOLUTION(2023, 9, a, i64) {
 
         while (!all_of(*diffs.back(), equal(0))) {
             auto& ns = *diffs.back();
-            diffs.push_back(ns | pairwise_transform(minus) | to<Vector>());
+            diffs.push_back(ns | pairwise_transform(flip(minus)) | to<Vector>());
         }
 
         sum += di::sum(diffs | transform([](auto& v) {
@@ -49,7 +49,7 @@ AOC_SOLUTION(2023, 9, b, i64) {
 
         while (!all_of(*diffs.back(), equal(0))) {
             auto& ns = *diffs.back();
-            diffs.push_back(ns | pairwise_transform(minus) | to<Vector>());
+            diffs.push_back(ns | pairwise_transform(flip(minus)) | to<Vector>());
         }
 
         auto res = 0;
