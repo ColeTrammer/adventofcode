@@ -36,7 +36,7 @@ constexpr inline auto is_space = di::piped(' '_mc || '\t'_mc || '\n'_mc || '\r'_
 constexpr inline auto is_dot = di::piped('.'_mc);
 
 namespace aoc::detail {
-struct TrimFunction {
+struct TrimFunction : di::function::pipeline::EnablePipeline {
     constexpr auto operator()(Tsv view) const -> Tsv {
         auto begin = view.begin();
         auto end = view.end();

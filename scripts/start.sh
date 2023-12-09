@@ -16,7 +16,7 @@ project_root=$(realpath "$script_dir/..")
 year=$(date +%Y)
 today=$(date +%d)
 
-next_day=$(($today + 1))
+next_day=$((${today#0} + 1))
 
 "$script_dir/new.sh" "$year" "$next_day"
 
