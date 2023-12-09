@@ -44,17 +44,17 @@ using namespace dius;
 AOC_SOLUTION($year, $day, a, i64) {
     auto lines = input | splitv('\n');
 
-    auto sum = 0;
+    auto s = 0;
     for (auto [row, line] : enumerate(lines)) {}
-    return sum;
+    return s;
 }
 
 AOC_SOLUTION($year, $day, b, i64) {
     auto lines = input | splitv('\n');
 
-    auto sum = 0;
+    auto s = 0;
     for (auto [row, line] : enumerate(lines)) {}
-    return sum;
+    return s;
 }
 __EOF__
 

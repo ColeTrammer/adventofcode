@@ -25,14 +25,12 @@ AOC_SOLUTION(2023, 9, a, i64) {
         auto diffs = Vector<Vector<i32>> {};
         diffs.push_back(clone(nums));
 
-        while (!all_of(*diffs.back(), equal(0))) {
-            auto& ns = *diffs.back();
+        while (!all_of(last(diffs), equal(0))) {
+            auto& ns = last(diffs);
             diffs.push_back(ns | pairwise_transform(flip(minus)) | to<Vector>());
         }
 
-        sum += di::sum(diffs | transform([](auto& v) {
-                           return *v.back();
-                       }));
+        sum += di::sum(diffs | transform(last));
     }
     return sum;
 }
@@ -47,8 +45,8 @@ AOC_SOLUTION(2023, 9, b, i64) {
         auto diffs = Vector<Vector<i32>> {};
         diffs.push_back(clone(nums));
 
-        while (!all_of(*diffs.back(), equal(0))) {
-            auto& ns = *diffs.back();
+        while (!all_of(last(diffs), equal(0))) {
+            auto& ns = last(diffs);
             diffs.push_back(ns | pairwise_transform(flip(minus)) | to<Vector>());
         }
 

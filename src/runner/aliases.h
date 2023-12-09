@@ -15,6 +15,7 @@
 #include <di/container/concepts/container_of.h>
 #include <di/container/concepts/random_access_container.h>
 #include <di/container/concepts/sized_container.h>
+#include <di/container/interface/access.h>
 #include <di/container/meta/container_reference.h>
 #include <di/container/string/string.h>
 #include <di/container/tree/tree_set.h>
@@ -265,3 +266,7 @@ constexpr inline auto all_nums = di::curry_back(aoc::detail::AllNums<int> {}, di
 
 template<typename I>
 constexpr inline auto all_nums_i = di::curry_back(aoc::detail::AllNums<I> {}, di::c_<2zu>);
+
+constexpr inline auto first = di::front_unchecked;
+constexpr inline auto last = di::back_unchecked;
+constexpr inline auto access = di::at_unchecked;
