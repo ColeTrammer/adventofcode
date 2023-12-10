@@ -66,14 +66,6 @@ touch "$project_root/$input_dir/$input_file"
 echo "Creating test file '$project_root/$input_dir/$test_file'..."
 touch "$project_root/$input_dir/$test_file"
 
-problem_name=`printf "%s/%02d" $year $day`
-echo "Adding $problem_name to '$project_root/src/problem_list.txt'..."
-echo "$problem_name" >> "$project_root/src/problem_list.txt"
-
-cp "$project_root/src/problem_list.txt" /tmp/problem_list.txt
-sort /tmp/problem_list.txt | uniq > "$project_root/src/problem_list.txt"
-rm -f /tmp/problem_list.txt
-
 echo "Opening $project_root/$source_file..."
 code "$project_root/$source_file"
 
