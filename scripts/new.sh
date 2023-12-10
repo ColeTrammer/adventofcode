@@ -25,8 +25,6 @@ mkdir -p "$project_root/src/$year"
 
 echo "Creating source file '$project_root/$source_file'..."
 cat > "$project_root/$source_file" << __EOF__
-#include <runner/aoc_problem_registry.h>
-
 #include <di/container/interface/empty.h>
 #include <di/container/tree/tree_map.h>
 #include <di/container/tree/tree_multimap.h>
@@ -37,6 +35,7 @@ cat > "$project_root/$source_file" << __EOF__
 #include <di/container/view/zip.h>
 #include <dius/print.h>
 #include <runner/aliases.h>
+#include <runner/aoc_problem_registry.h>
 
 using namespace di;
 using namespace dius;

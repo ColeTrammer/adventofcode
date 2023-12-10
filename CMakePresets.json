@@ -18,7 +18,8 @@
                 "IROS_BuildUserspace": "OFF",
                 "IROS_BuildTests": "OFF",
                 "IROS_BuildTools": "OFF",
-                "IROS_BuildCcpp": "ON",
+                "IROS_BuildCcpp": "OFF",
+                "IROS_BuildLibraries": "ON",
                 "IROS_UseDiusRuntime": "ON",
                 "IROS_NeverBuildDocs": "ON"
             }

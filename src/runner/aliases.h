@@ -1,16 +1,5 @@
 #pragma once
 
-#include <di/container/vector/vector.h>
-#include <di/container/view/pairwise.h>
-#include <di/function/curry_back.h>
-#include <di/function/invoke.h>
-#include <di/function/pipeable.h>
-#include <di/function/piped.h>
-#include <di/meta/language.h>
-#include <di/util/to_owned.h>
-#include <dius/print.h>
-#include <runner/helpful_includes.h>
-
 #include <di/container/concepts/container.h>
 #include <di/container/concepts/container_of.h>
 #include <di/container/concepts/random_access_container.h>
@@ -19,12 +8,21 @@
 #include <di/container/meta/container_reference.h>
 #include <di/container/string/string.h>
 #include <di/container/tree/tree_set.h>
+#include <di/container/vector/vector.h>
+#include <di/container/view/pairwise.h>
 #include <di/container/view/single.h>
+#include <di/function/curry_back.h>
 #include <di/function/generator.h>
+#include <di/function/invoke.h>
+#include <di/function/pipeable.h>
+#include <di/function/piped.h>
 #include <di/meta/core.h>
+#include <di/meta/language.h>
 #include <di/meta/util.h>
 #include <di/parser/integral_set.h>
 #include <di/parser/parse_unchecked.h>
+#include <di/util/to_owned.h>
+#include <dius/print.h>
 
 using Ts = di::TransparentString;
 using Tsv = di::TransparentStringView;
