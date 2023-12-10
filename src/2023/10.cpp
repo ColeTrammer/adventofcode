@@ -236,78 +236,16 @@ AOC_SOLUTION(2023, 10, b, i64) {
             continue;
         }
 
-        auto nodes = Vector<Point> {};
-        auto vs = TreeSet<Point> {};
-        nodes.push_back({ row, col });
-        vs.insert({ row, col });
-
-        auto contained = true;
-        while (!nodes.empty() && contained) {
-            auto curr = di::move(nodes);
-            for (auto [row, col] : curr) {
-                if (row == 0 || col == 0 || row == lines.size() || col == lines[0].size()) {
-                    contained = false;
-                    break;
-                }
-
-                for (auto [dr, dc] : Array { Point { -1, 0 }, Point { 1, 0 }, Point { 0, 1 }, Point { 0, -1 } }) {
-                    auto r = row + dr;
-                    auto c = col + dc;
-                    if (r > lines.size() || c > lines[0].size()) {
-                        continue;
-                    }
-                    if (vs.contains({ r, c })) {
-                        continue;
-                    }
-
-                    // Down
-                    if (dr == 1) {
-                        auto c1 = lines[row][col - 1];
-                        auto c2 = lines[row][col];
-
-                        if ((c1 == 'F' || c1 == '-' || c1 == 'L') && (c2 == 'J' || c2 == '-' || c2 == '7')) {
-                            continue;
-                        }
-                    }
-                    // Up
-                    if (dr == usize(-1)) {
-                        auto c1 = lines[row - 1][col - 1];
-                        auto c2 = lines[row - 1][col];
-                        if ((c1 == 'F' || c1 == '-' || c1 == 'L') && (c2 == 'J' || c2 == '-' || c2 == '7')) {
-                            continue;
-                        }
-                    }
-
-                    // Left
-                    if (dc == usize(-1)) {
-                        auto c1 = lines[row - 1][col - 1];
-                        auto c2 = lines[row][col - 1];
-                        if ((c1 == 'F' || c1 == '|' || c1 == '7') && (c2 == 'J' || c2 == '|' || c2 == 'L')) {
-                            continue;
-                        }
-                    }
-
-                    // Right
-                    if (dc == usize(1)) {
-                        auto c1 = lines[row - 1][col];
-                        auto c2 = lines[row][col];
-                        if ((c1 == 'F' || c1 == '|' || c1 == '7') && (c2 == 'J' || c2 == '|' || c2 == 'L')) {
-                            continue;
-                        }
-                    }
-
-                    // println("A: {} {}"_sv, r, c);
-                    vs.insert({ r, c });
-                    nodes.push_back({ r, c });
-                }
+        auto c = 0;
+        while (++row < lines.size()) {
+            if (any_of(Array { '-', '7', 'J' }, equal(lines[row][col]))) {
+                c++;
             }
         }
 
-        if (!contained) {
-            continue;
+        if (c % 2 == 1) {
+            s++;
         }
-
-        s++;
     }
 
     return s;
