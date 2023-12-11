@@ -16,6 +16,7 @@
 #include <di/function/invoke.h>
 #include <di/function/pipeable.h>
 #include <di/function/piped.h>
+#include <di/function/proj.h>
 #include <di/meta/core.h>
 #include <di/meta/language.h>
 #include <di/meta/util.h>
@@ -130,58 +131,6 @@ struct NeighborsFunction {
 }
 
 constexpr inline auto neighbors = aoc::detail::NeighborsFunction {};
-
-namespace aoc::detail {
-template<typename P, typename F>
-class ProjImpl : di::function::pipeline::EnablePipeline {
-public:
-    template<typename Pn, typename Fn>
-    constexpr explicit ProjImpl(Pn&& p, Fn&& f) : m_proj(di::forward<Pn>(p)), m_f(di::forward<Fn>(f)) {}
-
-    constexpr ProjImpl(ProjImpl const&) = default;
-    constexpr ProjImpl(ProjImpl&&) = default;
-
-    constexpr ProjImpl& operator=(ProjImpl const&) = delete;
-    constexpr ProjImpl& operator=(ProjImpl&&) = delete;
-
-    template<typename... Args>
-    requires(di::concepts::Invocable<F&, di::meta::InvokeResult<P&, Args>...>)
-    constexpr auto operator()(Args&&... args) & -> decltype(auto) {
-        return di::invoke(m_f, di::invoke(m_proj, di::forward<Args>(args))...);
-    }
-
-    template<typename... Args>
-    requires(di::concepts::Invocable<F const&, di::meta::InvokeResult<P const&, Args>...>)
-    constexpr auto operator()(Args&&... args) const& -> decltype(auto) {
-        return di::invoke(m_f, di::invoke(m_proj, di::forward<Args>(args))...);
-    }
-
-    template<typename... Args>
-    requires(di::concepts::Invocable<F &&, di::meta::InvokeResult<P&, Args>...>)
-    constexpr auto operator()(Args&&... args) && -> decltype(auto) {
-        return di::invoke(di::move(m_f), di::invoke(m_proj, di::forward<Args>(args))...);
-    }
-
-    template<typename... Args>
-    requires(di::concepts::Invocable<F const &&, di::meta::InvokeResult<P const&, Args>...>)
-    constexpr auto operator()(Args&&... args) const&& -> decltype(auto) {
-        return di::invoke(di::move(m_f), di::invoke(m_proj, di::forward<Args>(args))...);
-    }
-
-private:
-    P m_proj;
-    F m_f;
-};
-
-struct ProjFunction {
-    template<di::concepts::DecayConstructible P, di::concepts::DecayConstructible F>
-    constexpr auto operator()(P&& predicate, F&& function) const {
-        return ProjImpl<di::meta::Decay<P>, di::meta::Decay<F>> { di::forward<P>(predicate), di::forward<F>(function) };
-    }
-};
-}
-
-constexpr inline auto proj = aoc::detail::ProjFunction {};
 
 namespace aoc::detail {
 template<di::concepts::Integral T>
