@@ -4,13 +4,13 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 ## Table of Solution Completion
 
-| Year | Language | Number of Problems Solved |
-| ---- | -------- | ------------------------- |
-| 2023 | C++      | 13/25                     |
-| 2022 | Rust     | 25/25                     |
-| 2021 | Rust     | 8/25                      |
-| 2020 | C++      | 3/25                      |
-| 2019 | C++      | 1/25                      |
+| Year | Language | Number of Problems Solved | Score |
+| ---- | -------- | ------------------------- | ----- |
+| 2023 | C++      | 13/25                     | 15    |
+| 2022 | Rust     | 25/25                     | 0     |
+| 2021 | Rust     | 8/25                      | 0     |
+| 2020 | C++      | 3/25                      | 0     |
+| 2019 | C++      | 1/25                      | 0     |
 
 ## Placement on Leaderboards
 
