@@ -38,14 +38,14 @@ AOC_SOLUTION(2023, 17, a, i64) {
     while (!q.empty()) {
         auto [s, st] = *q.pop();
         auto [x, y, dx, dy, c] = st;
-        if (x == lines[0].size() - 1 && y == lines.size() - 1) {
+        if (x == ssize(lines[0]) - 1 && y == ssize(lines) - 1) {
             return s;
         }
 
         for (auto [ndx, ndy] : Array { Tuple { -1, 0 }, Tuple { 1, 0 }, Tuple { 0, 1 }, Tuple { 0, -1 } }) {
             auto nx = x + ndx;
             auto ny = y + ndy;
-            if (nx < 0 || nx >= lines[0].size() || ny < 0 || ny >= lines.size()) {
+            if (nx < 0 || nx >= ssize(lines[0]) || ny < 0 || ny >= ssize(lines)) {
                 continue;
             }
 
@@ -86,7 +86,7 @@ AOC_SOLUTION(2023, 17, b, i64) {
     while (!q.empty()) {
         auto [s, st] = *q.pop();
         auto [x, y, dx, dy, c] = st;
-        if (x == lines[0].size() - 1 && y == lines.size() - 1) {
+        if (x == ssize(lines[0]) - 1 && y == ssize(lines) - 1) {
             if (c < 4) {
                 continue;
             }
@@ -96,7 +96,7 @@ AOC_SOLUTION(2023, 17, b, i64) {
         for (auto [ndx, ndy] : Array { Tuple { -1, 0 }, Tuple { 1, 0 }, Tuple { 0, 1 }, Tuple { 0, -1 } }) {
             auto nx = x + ndx;
             auto ny = y + ndy;
-            if (nx < 0 || nx >= lines[0].size() || ny < 0 || ny >= lines.size()) {
+            if (nx < 0 || nx >= ssize(lines[0]) || ny < 0 || ny >= ssize(lines)) {
                 continue;
             }
 

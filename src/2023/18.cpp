@@ -160,11 +160,6 @@ AOC_SOLUTION(2023, 18, b, i64) {
 
     sort(ls);
 
-    for (auto [p1, p2] : ls) {
-        auto [x1, y1] = p1;
-        auto [x2, y2] = p2;
-    }
-
     // Assume the shape starts like this:
     // ------
     // |
