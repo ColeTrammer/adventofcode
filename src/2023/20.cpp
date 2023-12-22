@@ -151,7 +151,7 @@ AOC_SOLUTION(2023, 20, b, i64) {
                 }
             }
             if (nodes == "rx"_tsv) {
-                rx_values = clone(input_nodes);
+                rx_values = di::clone(input_nodes);
             }
             gates[name] = make_function<void(Pulse)>([name, nodes, &add_pulse, memory = TreeMap<Tsv, bool> {},
                                                       input_nodes = di::move(input_nodes)](Pulse pulse) mutable {

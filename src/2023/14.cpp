@@ -68,7 +68,6 @@ AOC_SOLUTION(2023, 14, b, i64) {
                 auto r = row + dr;
                 auto c = col + dc;
                 while (r < lines.size() && c < line.size() && lines[r][c] == '.') {
-                    // println("{} {} {} {}"_sv, r, c, r - dr, c - dc);
                     swap(lines[r][c], lines[r - dr][c - dc]);
                     r += dr;
                     c += dc;
@@ -84,11 +83,11 @@ AOC_SOLUTION(2023, 14, b, i64) {
         for (auto& line : lines) {
             key += line;
         }
-        auto r = map.try_emplace(clone(key), i);
+        auto r = map.try_emplace(di::clone(key), i);
         if (!tget<1>(r)) {
             return tget<1>(*tget<0>(r));
         }
-        rmap[i] = clone(lines);
+        rmap[i] = di::clone(lines);
         return nullopt;
     };
 
@@ -98,7 +97,7 @@ AOC_SOLUTION(2023, 14, b, i64) {
             auto d = 1000000000zu - *r;
             d %= l;
 
-            lines = clone(rmap[*r + d]);
+            lines = di::clone(rmap[*r + d]);
 
             break;
         }

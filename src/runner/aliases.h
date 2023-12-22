@@ -216,4 +216,6 @@ constexpr inline auto all_nums_i = di::curry_back(aoc::detail::AllNums<I> {}, di
 
 constexpr inline auto first = di::front_unchecked;
 constexpr inline auto last = di::back_unchecked;
+namespace aoc {
 constexpr inline auto access = di::at_unchecked;
+}

@@ -23,7 +23,7 @@ AOC_SOLUTION(2023, 9, a, i64) {
         auto nums = all_nums(line);
 
         auto diffs = Vector<Vector<i32>> {};
-        diffs.push_back(clone(nums));
+        diffs.push_back(di::clone(nums));
 
         while (!all_of(last(diffs), equal(0))) {
             auto& ns = last(diffs);
@@ -43,7 +43,7 @@ AOC_SOLUTION(2023, 9, b, i64) {
         auto nums = all_nums(line);
 
         auto diffs = Vector<Vector<i32>> {};
-        diffs.push_back(clone(nums));
+        diffs.push_back(di::clone(nums));
 
         while (!all_of(last(diffs), equal(0))) {
             auto& ns = last(diffs);
