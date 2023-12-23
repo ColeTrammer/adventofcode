@@ -82,7 +82,6 @@ AOC_SOLUTION(2023, 21, b, i64) {
     auto const scol = width / 2;
 
     auto const steps_to_edge_from_center = scol + 1;
-    auto const steps_to_corner_from_center = scol + srow + 2;
     auto const steps_to_edge_from_edge = width;
 
     auto const full_grids_directionally = (n - steps_to_edge_from_center) / steps_to_edge_from_edge;
@@ -93,16 +92,6 @@ AOC_SOLUTION(2023, 21, b, i64) {
 
     auto const diagonal_grids_small = full_grids_directionally + 1;
     auto const diagonal_grids_large = full_grids_directionally;
-
-    eprintln("width={} height={} n={} srow={} scol={}"_sv, width, height, n, srow, scol);
-    eprintln("steps_to_edge_from_center={} steps_to_corner_from_center={}"_sv, steps_to_edge_from_center,
-             steps_to_corner_from_center);
-    eprintln("steps_to_edge_from_edge={}"_sv, steps_to_edge_from_edge);
-
-    eprintln("full_grids_directionally={} partial_directional_grids_iterations={}"_sv, full_grids_directionally,
-             partial_directional_grids_iterations);
-    eprintln("partial_diagonal_grids_iterations={} partial_diagonal_large_iterations={}"_sv,
-             partial_diagonal_grids_iterations, partial_diagonal_large_iterations);
 
     auto odd_full_grids = 1z;
     auto even_full_grids = 0z;
@@ -124,43 +113,23 @@ AOC_SOLUTION(2023, 21, b, i64) {
         }
     }
 
-    eprintln("odd_full_grids={} even_full_grids={} total_full_grids={}"_sv, odd_full_grids, even_full_grids,
-             odd_full_grids + even_full_grids);
-
     auto const reachable_from_even_full_grid = dfs(srow, scol, 2 * width);
     auto const reachable_from_odd_full_grid = dfs(srow, scol, 2 * width + 1);
-
-    eprintln("reachable_from_even_full_grid={} reachable_from_odd_full_grid={}"_sv, reachable_from_even_full_grid,
-             reachable_from_odd_full_grid);
 
     auto const reachable_from_pure_right = dfs(srow, 0, partial_directional_grids_iterations);
     auto const reachable_from_pure_left = dfs(srow, width - 1, partial_directional_grids_iterations);
     auto const reachable_from_pure_up = dfs(height - 1, scol, partial_directional_grids_iterations);
     auto const reachable_from_pure_down = dfs(0, scol, partial_directional_grids_iterations);
 
-    eprintln(
-        "reachable_from_pure_right={} reachable_from_pure_left={} reachable_from_pure_up={} reachable_from_pure_down={}"_sv,
-        reachable_from_pure_right, reachable_from_pure_left, reachable_from_pure_up, reachable_from_pure_down);
-
     auto const reachable_from_partial_bottom_right = dfs(height - 1, 0, partial_diagonal_grids_iterations);
     auto const reachable_from_partial_bottom_left = dfs(height - 1, width - 1, partial_diagonal_grids_iterations);
     auto const reachable_from_partial_top_right = dfs(0, 0, partial_diagonal_grids_iterations);
     auto const reachable_from_partial_top_left = dfs(0, width - 1, partial_diagonal_grids_iterations);
 
-    eprintln(
-        "reachable_from_partial_bottom_right={} reachable_from_partial_bottom_left={} reachable_from_partial_top_right={} reachable_from_partial_top_left={}"_sv,
-        reachable_from_partial_bottom_right, reachable_from_partial_bottom_left, reachable_from_partial_top_right,
-        reachable_from_partial_top_left);
-
     auto const reachable_from_partial_bottom_right_large = dfs(height - 1, 0, partial_diagonal_large_iterations);
     auto const reachable_from_partial_bottom_left_large = dfs(height - 1, width - 1, partial_diagonal_large_iterations);
     auto const reachable_from_partial_top_right_large = dfs(0, 0, partial_diagonal_large_iterations);
     auto const reachable_from_partial_top_left_large = dfs(0, width - 1, partial_diagonal_large_iterations);
-
-    eprintln(
-        "reachable_from_partial_bottom_right_large={} reachable_from_partial_bottom_left_large={} reachable_from_partial_top_right_large={} reachable_from_partial_top_left_large={}"_sv,
-        reachable_from_partial_bottom_right_large, reachable_from_partial_bottom_left_large,
-        reachable_from_partial_top_right_large, reachable_from_partial_top_left_large);
 
     auto s = 0z;
 

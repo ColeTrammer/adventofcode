@@ -106,8 +106,9 @@ AOC_SOLUTION(2023, 5, b, usize) {
                     else {
                         new_intervals.push_back(
                             Interval { source_interval.start - source + dest, source_interval.end - source + dest });
-                        seeds.push_back(Interval { seed.start, source_interval.start });
+                        auto seed_copy = seed;
                         seed = Interval { source_interval.end, seed.end };
+                        seeds.push_back(Interval { seed_copy.start, source_interval.start });
                     }
                 }
             }

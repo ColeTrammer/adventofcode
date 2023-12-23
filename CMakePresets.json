@@ -37,7 +37,7 @@
             "name": "clang_base",
             "hidden": true,
             "cacheVariables": {
-                "CMAKE_CXX_COMPILER": "clang-16",
+                "CMAKE_CXX_COMPILER": "clang++",
                 "IROS_DiagnosticFlags": "-fcolor-diagnostics;-fconstexpr-steps=10000000;-fsized-deallocation"
             },
             "inherits": ["base"]
