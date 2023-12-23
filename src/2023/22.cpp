@@ -96,10 +96,16 @@ AOC_SOLUTION(2023, 22, a, i64) {
                     break;
                 }
 
+                for (auto [x, y, z] : points_in_line(line)) {
+                    lines_from_points.erase({ x, y, z });
+                }
+                for (auto [x, y, z] : points_in_line(line)) {
+                    lines_from_points[{ x, y, z - 1 }] = &line;
+                }
+
                 tget<2>(tget<0>(line))--;
                 tget<2>(tget<1>(line))--;
             }
-            make_map();
         }
     };
 
@@ -206,12 +212,18 @@ AOC_SOLUTION(2023, 22, b, i64) {
                 }
                 did_fall = true;
 
+                for (auto [x, y, z] : points_in_line(line)) {
+                    lines_from_points.erase({ x, y, z });
+                }
+                for (auto [x, y, z] : points_in_line(line)) {
+                    lines_from_points[{ x, y, z - 1 }] = &line;
+                }
+
                 tget<2>(tget<0>(line))--;
                 tget<2>(tget<1>(line))--;
             }
 
             if (did_fall) {
-                make_map();
                 ++res;
             }
         }
