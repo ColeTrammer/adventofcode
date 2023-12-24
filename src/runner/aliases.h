@@ -219,3 +219,15 @@ constexpr inline auto last = di::back_unchecked;
 namespace aoc {
 constexpr inline auto access = di::at_unchecked;
 }
+
+namespace aoc::detail {
+inline auto read_to_string(di::PathView path) -> di::Result<di::TransparentString> {
+    auto file = TRY(dius::open_sync(path, dius::OpenMode::Readonly));
+    auto bytes = TRY(di::read_all(file));
+
+    return bytes | di::transform([](byte byte) {
+               return di::to_integer<char>(byte);
+           }) |
+           di::to<di::Vector>() | di::to<di::TransparentString>();
+}
+}
