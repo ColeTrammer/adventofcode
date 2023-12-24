@@ -88,50 +88,107 @@ AOC_SOLUTION(2023, 24, b, i64) {
         ls.push_back({ Point { x, y, z }, Point { x2, y2, z2 } });
     }
 
-    auto s = Vector<String> {};
-    s.push_back("from sympy import solve, Symbol"_s);
-    s.push_back("f = []"_s);
-    s.push_back("x = Symbol('x')"_s);
-    s.push_back("y = Symbol('y')"_s);
-    s.push_back("z = Symbol('z')"_s);
-    s.push_back("vx = Symbol('vx')"_s);
-    s.push_back("vy = Symbol('vy')"_s);
-    s.push_back("vz = Symbol('vz')"_s);
+    // L1: t1 v + p = t1 v1 + p1
+    //  => (p - p1) = -t1 (v - v1)
+    //  => (p - p1) x (v - v1) = 0
+    // L2: t2 v + p = t2 v2 + p2
+    //  => (p - p2) = -t2 (v - v2)
+    //  => (p - p2) x (v - v2) = 0
+    // L3: t3 v + p = t3 v3 + p3
+    //  => (p - p3) = -t3 (v - v3)
+    //  => (p - p3) x (v - v3) = 0
 
-    auto vars = Vector<String> {};
-    vars.push_back("x"_s);
-    vars.push_back("y"_s);
-    vars.push_back("z"_s);
-    vars.push_back("vx"_s);
-    vars.push_back("vy"_s);
-    vars.push_back("vz"_s);
+    // Combine to get 6 equations for 6 unknowns:
+    // (p - p1) x (v - v1) = (p - p2) x (v - v2)
+    // (p - p1) x (v - v1) = (p - p3) x (v - v3)
 
-    for (auto [i, l] : enumerate(ls)) {
-        auto [p, v] = l;
-        auto [x, y, z] = p;
-        auto [vx, vy, vz] = v;
+    auto matrix = Array<Array<double, 7>, 6> {};
 
-        s.push_back(*present("f.append(({} - z)/(vz - {}) - ({} - x)/(vx - {}))"_sv, z, vz, x, vx));
-        s.push_back(*present("f.append(({} - z)/(vz - {}) - ({} - y)/(vy - {}))"_sv, z, vz, y, vy));
-        s.push_back(*present("f.append(({} - y)/(vy - {}) - ({} - x)/(vx - {}))"_sv, y, vy, x, vx));
+    auto equation_for = [&](Point p1, Point v1, Point p2, Point v2) {
+        auto [x1, y1, z1] = p1;
+        auto [vx1, vy1, vz1] = v1;
+        auto [x2, y2, z2] = p2;
+        auto [vx2, vy2, vz2] = v2;
+
+        return Array {
+            Array { 0_i64, -(vz1 - vz2), vy1 - vy2, 0_i64, z1 - z2, -(y1 - y2),
+                    y2 * vz2 - z2 * vy2 - (y1 * vz1 - z1 * vy1) },
+            Array { vz1 - vz2, 0_u64, -(vx1 - vx2), -(z1 - z2), 0_i64, x1 - x2,
+                    z2 * vx2 - x2 * vz2 - (z1 * vx1 - x1 * vz1) },
+            Array { -(vy1 - vy2), vx1 - vx2, 0_i64, y1 - y2, -(x1 - x2), 0_i64,
+                    x2 * vy2 - y2 * vx2 - (x1 * vy1 - y1 * vx1) },
+        };
+    };
+
+    auto [p1, v1] = ls[0];
+    auto [p2, v2] = ls[1];
+    auto [p3, v3] = ls[2];
+
+    auto a = equation_for(p1, v1, p2, v2);
+    auto b = equation_for(p1, v1, p3, v3);
+
+    for (auto [r, row] : enumerate(a)) {
+        for (auto [c, v] : enumerate(row)) {
+            matrix[r][c] = v;
+        }
+    }
+    for (auto [r, row] : enumerate(b)) {
+        for (auto [c, v] : enumerate(row)) {
+            matrix[r + 3][c] = v;
+        }
     }
 
-    s.push_back(*present("r = solve([*f], [{}], dict=True, check=False)"_sv, vars | join_with(U',') | to<String>()));
-    s.push_back(*present("s = r[0][x] + r[0][y] + r[0][z]"_sv));
+    auto ffabs = [](double x) {
+        if (x < 0) {
+            return -x;
+        }
+        return x;
+    };
 
-    s.push_back(*present("file = open('/tmp/2023-24.txt', 'w')"_sv));
-    s.push_back(*present("file.write(f'{{s}}')"_sv));
-    s.push_back(*present("file.close()"_sv));
+    auto h = 0_usize;
+    auto k = 0_usize;
+    while (h < 6 && k < 7) {
+        auto i_max = h;
+        for (auto i = h + 1; i < 6; i++) {
+            if (ffabs(matrix[i][k]) > ffabs(matrix[i_max][k])) {
+                i_max = i;
+            }
+        }
 
-    auto file = *open_sync("/tmp/2023-24.py"_pv, OpenMode::WriteClobber);
+        if (matrix[i_max][k] == 0) {
+            ++k;
+            continue;
+        } else {
+            swap(matrix[h], matrix[i_max]);
 
-    for (auto const& line : s) {
-        di::writer_println<di::container::string::Utf8Encoding>(file, "{}"_sv, line);
+            for (auto i = h + 1; i < 6; i++) {
+                auto f = matrix[i][k] / matrix[h][k];
+                matrix[i][k] = 0;
+                for (auto j = k + 1; j < 7; j++) {
+                    matrix[i][j] -= f * matrix[h][j];
+                }
+            }
+
+            ++h;
+            ++k;
+        }
     }
 
-    ASSERT(dius::system::Process(Array { "/usr/bin/python"_ts, "/tmp/2023-24.py"_ts } | to<Vector>()).spawn_and_wait());
+    for (auto row : range(6) | reverse) {
+        for (auto c : range(row + 1, 6)) {
+            auto v = matrix[row][c];
+            matrix[row][c] = 0;
+            matrix[row][6] -= v * matrix[c][6];
+        }
+        auto vv = matrix[row][row];
+        for (auto& v : matrix[row]) {
+            v /= vv;
+        }
+    }
 
-    auto result = *aoc::detail::read_to_string("/tmp/2023-24.txt"_pv);
+    auto x = i64(matrix[0][6] + 0.4);
+    auto y = i64(matrix[1][6] + 0.4);
+    auto z = i64(matrix[2][6] + 0.4);
 
-    return uparse_i<i64>(result);
+    return x + y + z;
 }
