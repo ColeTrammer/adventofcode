@@ -53,7 +53,7 @@ di::Result<void> main(Args& args) {
         return di::Unexpected(di::BasicError::InvalidArgument);
     }
 
-    (*solver)(view);
+    (*solver)(view, args.test);
     return {};
 }
 }
