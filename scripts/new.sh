@@ -65,12 +65,3 @@ touch "$project_root/$input_dir/$input_file"
 
 echo "Creating test file '$project_root/$input_dir/$test_file'..."
 touch "$project_root/$input_dir/$test_file"
-
-echo "Opening $project_root/$source_file..."
-code "$project_root/$source_file"
-
-echo "Opening $project_root/$input_dir/$input_file..."
-code "$project_root/$input_dir/$input_file"
-
-echo "Opening $project_root/$input_dir/$test_file..."
-code "$project_root/$input_dir/$test_file"
