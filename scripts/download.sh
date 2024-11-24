@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 usage() {
     echo "Usage: $0 <year> <day>"
@@ -20,11 +20,11 @@ year=$1
 day=$2
 
 input_dir="input/$year"
-file_name=`printf "input_%02d.txt" $day`
+file_name=$(printf "input_%02d.txt" "$day")
 output_path="$project_root/$input_dir/$file_name"
 mkdir -p "$project_root/$input_dir"
 
 url="https://adventofcode.com/$year/day/$day/input"
 
 echo "Downloading input from '$url' to '$output_path'..."
-curl -s -b "session=$AOC_SESSION" "$url" > "$output_path"
+curl -s -b "session=$AOC_SESSION" "$url" >"$output_path"

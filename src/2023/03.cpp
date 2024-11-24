@@ -1,13 +1,12 @@
 #include <di/container/algorithm/product.h>
-#include <di/container/view/chunk_by.h>
-#include <di/function/equal.h>
-#include <runner/aoc_problem_registry.h>
-
 #include <di/container/interface/empty.h>
 #include <di/container/tree/tree_set.h>
+#include <di/container/view/chunk_by.h>
+#include <di/function/equal.h>
 #include <di/function/not_fn.h>
 #include <dius/print.h>
 #include <runner/aliases.h>
+#include <runner/aoc_problem_registry.h>
 
 using namespace di;
 using namespace dius;

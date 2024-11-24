@@ -1,12 +1,11 @@
+#include <di/container/interface/empty.h>
 #include <di/container/interface/reconstruct.h>
 #include <di/container/view/drop.h>
-#include <di/parser/parse_unchecked.h>
-#include <runner/aoc_problem_registry.h>
-
-#include <di/container/interface/empty.h>
 #include <di/function/not_fn.h>
+#include <di/parser/parse_unchecked.h>
 #include <dius/print.h>
 #include <runner/aliases.h>
+#include <runner/aoc_problem_registry.h>
 
 using namespace di;
 using namespace dius;

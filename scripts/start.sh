@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 usage() {
     echo "Usage: $0"
@@ -11,7 +11,6 @@ if [ -z "$AOC_SESSION" ]; then
 fi
 
 script_dir=$(dirname "$0")
-project_root=$(realpath "$script_dir/..")
 
 year=$(date +%Y)
 today=$(date +%d)
@@ -20,8 +19,7 @@ next_day=$((${today#0} + 1))
 
 "$script_dir/new.sh" "$year" "$next_day"
 
-while true;
-do
+while true; do
     hour=$(date +%H)
     minute=$(date +%M)
     second=$(date +%S)

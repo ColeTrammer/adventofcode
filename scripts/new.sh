@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 usage() {
     echo "Usage: $0 <year> <day>"
@@ -15,16 +15,16 @@ project_root=$(realpath "$script_dir/..")
 year=$1
 day=$2
 
-source_file=`printf "src/%s/%02d.cpp" $year $day`
+source_file=$(printf "src/%s/%02d.cpp" "$year" "$day")
 input_dir="input/$year"
-input_file=`printf "input_%02d.txt" $day`
-test_file=`printf "test_%02d.txt" $day`
+input_file=$(printf "input_%02d.txt" "$day")
+test_file=$(printf "test_%02d.txt" "$day")
 
 echo "Creating source dir '$project_root/src/$year'..."
 mkdir -p "$project_root/src/$year"
 
 echo "Creating source file '$project_root/$source_file'..."
-cat > "$project_root/$source_file" << __EOF__
+cat >"$project_root/$source_file" <<__EOF__
 #include <di/container/interface/empty.h>
 #include <di/container/tree/tree_map.h>
 #include <di/container/tree/tree_multimap.h>

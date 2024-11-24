@@ -1,6 +1,5 @@
-#include <runner/aoc_problem_registry.h>
-
 #include <di/container/queue/priority_queue.h>
+#include <runner/aoc_problem_registry.h>
 
 AOC_SOLUTION(2022, 1, a, i32) {
     return input | di::split('\n') | di::split(""_tsv) |

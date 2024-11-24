@@ -20,6 +20,8 @@ public:
 
     constexpr auto lookup(Key key) const { return m_map.at(key); }
 
+    constexpr auto list() const { return di::keys(m_map); }
+
 private:
     AocProblemRegistry() = default;
 

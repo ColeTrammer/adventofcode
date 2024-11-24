@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 usage() {
     echo "Usage: $0 <year> <day> [part]"
@@ -14,8 +14,7 @@ day=$2
 part=$3
 
 url="https://adventofcode.com/$year/day/$day"
-if [ "$part" = "b" ];
-then
+if [ "$part" = "b" ]; then
     url="$url#part2"
 fi
 
