@@ -120,6 +120,12 @@ check_tidy *args="": ensure_configured
     export IROS_TIDY_ARGS="{{ args }}"
     cmake --build --preset {{ preset }} -t check_tidy
 
+# Add a new solution, open the problem, and download the input.
+init year day:
+    ./scripts/download.sh {{ year }} {{ day }}
+    ./scripts/new.sh {{ year }} {{ day }}
+    ./scripts/open.sh {{ year }} {{ day }}
+
 # Clean
 clean: ensure_configured
     @just preset={{ preset }} build --target clean

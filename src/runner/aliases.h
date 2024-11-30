@@ -7,6 +7,7 @@
 #include <di/container/interface/access.h>
 #include <di/container/meta/container_reference.h>
 #include <di/container/string/string.h>
+#include <di/container/tree/tree_map.h>
 #include <di/container/tree/tree_set.h>
 #include <di/container/vector/vector.h>
 #include <di/container/view/pairwise.h>
@@ -24,6 +25,15 @@
 #include <di/parser/parse_unchecked.h>
 #include <di/util/to_owned.h>
 #include <dius/print.h>
+
+template<typename T>
+using Vec = di::Vector<T>;
+
+template<typename K, typename V>
+using Map = di::TreeMap<K, V>;
+
+template<typename T>
+using Set = di::TreeSet<T>;
 
 using Ts = di::TransparentString;
 using Tsv = di::TransparentStringView;
