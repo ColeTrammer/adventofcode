@@ -14,6 +14,12 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 ## Placement on Leaderboards
 
+### 2024
+
+| Day | **Part A** | Time     | Rank | Score | **Part B** | Time     | Rank | Score |
+| --- | ---------- | -------- | ---- | ----- | ---------- | -------- | ---- | ----- |
+| 1   |            | 00:04:00 | 0    | 0     |            | 00:05:27 | 0    | 0     |
+
 ### 2023
 
 | Day | **Part A** | Time     | Rank | Score | **Part B** | Time     | Rank  | Score |
