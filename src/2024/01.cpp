@@ -22,7 +22,7 @@ AOC_SOLUTION(2024, 1, a, i64) {
     auto x = Vec<i32> {};
     auto y = Vec<i32> {};
     for (auto [row, line] : enumerate(lines)) {
-        for (auto [a, b] : all_nums(line, ' ') | pairwise) {
+        for (auto [a, b] : all_nums(line) | pairwise) {
             x.push_back(a);
             y.push_back(b);
         }
@@ -44,14 +44,14 @@ AOC_SOLUTION(2024, 1, b, i64) {
     auto x = Vec<i32> {};
     auto y = Map<i32, i32> {};
     for (auto [row, line] : enumerate(lines)) {
-        for (auto [a, b] : all_nums(line, ' ') | pairwise) {
+        for (auto [a, b] : all_nums(line) | pairwise) {
             x.push_back(a);
             y[b]++;
         }
     }
 
     for (auto a : x) {
-        s += a * y[a];
+        s += y[a];
     }
 
     return s;
