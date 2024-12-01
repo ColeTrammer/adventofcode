@@ -8,6 +8,7 @@
 #include <di/container/meta/container_reference.h>
 #include <di/container/string/string.h>
 #include <di/container/tree/tree_map.h>
+#include <di/container/tree/tree_multiset.h>
 #include <di/container/tree/tree_set.h>
 #include <di/container/vector/vector.h>
 #include <di/container/view/pairwise.h>
@@ -32,8 +33,14 @@ using Vec = di::Vector<T>;
 template<typename K, typename V>
 using Map = di::TreeMap<K, V>;
 
+template<typename K, typename V>
+using MultiMap = di::TreeMultiSet<K, V>;
+
 template<typename T>
 using Set = di::TreeSet<T>;
+
+template<typename T>
+using MultiSet = di::TreeMultiSet<T>;
 
 using Ts = di::TransparentString;
 using Tsv = di::TransparentStringView;

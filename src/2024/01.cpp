@@ -10,8 +10,6 @@
 #include <runner/aliases.h>
 #include <runner/aoc_problem_registry.h>
 
-#include "di/container/algorithm/sort.h"
-
 using namespace di;
 using namespace dius;
 
@@ -19,21 +17,16 @@ AOC_SOLUTION(2024, 1, a, i64) {
     auto lines = input | splitv("\n"_tsv);
 
     auto s = 0;
-    auto x = Vec<i32> {};
-    auto y = Vec<i32> {};
+    auto x = MultiSet<i32> {};
+    auto y = MultiSet<i32> {};
     for (auto [row, line] : enumerate(lines)) {
         for (auto [a, b] : all_nums(line) | pairwise) {
-            x.push_back(a);
-            y.push_back(b);
+            x.insert(a);
+            y.insert(b);
         }
     }
 
-    sort(x);
-    sort(y);
-
-    for (auto [a, b] : zip(x, y)) {
-        s += abs(a - b);
-    }
+    s = zip_transform(minus, x, y) | transform(abs) | sum;
     return s;
 }
 
@@ -51,7 +44,7 @@ AOC_SOLUTION(2024, 1, b, i64) {
     }
 
     for (auto a : x) {
-        s += y[a];
+        s += a * y[a];
     }
 
     return s;
