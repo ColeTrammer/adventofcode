@@ -27,6 +27,9 @@
 #include <di/util/to_owned.h>
 #include <dius/print.h>
 
+#include "di/function/equal_or_greater.h"
+#include "di/function/equal_or_less.h"
+
 template<typename T>
 using Vec = di::Vector<T>;
 
@@ -248,3 +251,19 @@ inline auto read_to_string(di::PathView path) -> di::Result<di::TransparentStrin
            di::to<di::Vector>() | di::to<di::TransparentString>();
 }
 }
+
+namespace aoc::detail {
+struct Between {
+    template<typename T, typename U, typename V>
+    constexpr static auto operator()(T const& value, U const& lower, V const& upper) -> bool
+    requires(requires {
+        { value >= lower } -> di::concepts::ImplicitlyConvertibleTo<bool>;
+        { value <= upper } -> di::concepts::ImplicitlyConvertibleTo<bool>;
+    })
+    {
+        return di::equal_or_greater(value, lower) && di::equal_or_less(value, upper);
+    }
+};
+}
+
+constexpr inline auto between = di::curry_back(aoc::detail::Between {}, di::meta::c_<3zu>);

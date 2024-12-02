@@ -27,9 +27,7 @@ AOC_SOLUTION(2024, 2, a, i64) {
         auto ds = ns | pairwise_transform(minus);
 
         if (all_of(ds, greater(0)) || all_of(ds, less(0))) {
-            if (all_of(ds | transform(abs), [](int x) {
-                    return x >= 1 && x <= 3;
-                })) {
+            if (all_of(ds | transform(abs), between(1, 3))) {
                 s++;
             }
         }
@@ -51,9 +49,7 @@ AOC_SOLUTION(2024, 2, b, i64) {
             auto ds = nss | pairwise_transform(minus);
 
             if (all_of(ds, greater(0)) || all_of(ds, less(0))) {
-                if (all_of(ds | transform(abs), [](int x) {
-                        return x >= 1 && x <= 3;
-                    })) {
+                if (all_of(ds | transform(abs), between(1, 3))) {
                     s++;
                     break;
                 }
