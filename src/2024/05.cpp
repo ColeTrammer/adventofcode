@@ -10,6 +10,8 @@
 #include <runner/aliases.h>
 #include <runner/aoc_problem_registry.h>
 
+#include "di/container/algorithm/sort.h"
+
 using namespace di;
 using namespace dius;
 
@@ -80,26 +82,14 @@ AOC_SOLUTION(2024, 5, b, i64) {
             continue;
         }
 
-        auto ns = Vec<i32> {};
-        auto vst = Set<i32> {};
-        auto gst = clone(vs) | to<Set<i32>>();
-        auto dfs = [&](this auto&& dfs, i32 n) -> void {
-            if (vst.contains(n) || !gst.contains(n)) {
-                return;
+        sort(vs, [&](i32 a, i32 b) {
+            if (g[a].contains(b)) {
+                return di::strong_ordering::less;
+            } else {
+                return di::strong_ordering::greater;
             }
-            vst.insert(n);
-
-            for (auto y : g[n]) {
-                dfs(y);
-            }
-
-            ns.push_back(n);
-        };
-
-        for (auto x : vs) {
-            dfs(x);
-        }
-        s += ns[ns.size() / 2];
+        });
+        s += vs[vs.size() / 2];
     }
     return s;
 }
