@@ -20,7 +20,7 @@ AOC_SOLUTION(2024, 7, a, i64) {
     for (auto [row, line] : enumerate(lines)) {
         auto [as, bs] = split_two(line.view(), ':');
         auto target = uparse_int(as);
-        auto ns = all_nums(bs, ' ');
+        auto ns = all_nums(bs);
 
         auto dfs = [&](this auto&& dfs, i64 p, usize i) -> bool {
             if (i == ns.size()) {
@@ -44,7 +44,7 @@ AOC_SOLUTION(2024, 7, b, i64) {
     for (auto [row, line] : enumerate(lines)) {
         auto [as, bs] = split_two(line.view(), ':');
         auto target = uparse_int(as);
-        auto ns = all_nums(bs, ' ');
+        auto ns = all_nums(bs);
 
         auto dfs = [&](this auto&& dfs, i64 p, usize i) -> bool {
             if (i == ns.size()) {
