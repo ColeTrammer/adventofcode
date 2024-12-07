@@ -10,9 +10,9 @@ alias br := build_run
 alias s := submit
 alias bs := build_submit
 
-# Default command: configure and build
+# Default command: list rules
 default:
-    @just preset={{ preset }} configure_build
+    @just --list
 
 # Configure
 configure *args="":
