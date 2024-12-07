@@ -166,7 +166,7 @@ struct ParseIFunction : di::function::pipeline::EnablePipeline {
     requires(di::concepts::ContainerOf<U, c32>)
     constexpr auto operator()(U&& input) const {
         auto string = di::forward<U>(input) | di::to<di::Vector>() | di::to<di::String>();
-        return di::parser::parse_unchecked<T>(string);
+        return di::parser::parse<T>(string.view()).optional_value();
     }
 };
 
