@@ -43,7 +43,7 @@ using namespace dius;
 AOC_SOLUTION($year, $day, a, i64) {
     auto lines = input | splitv("\n"_tsv);
 
-    auto s = 0;
+    auto s = 0_i64;
     for (auto [row, line] : enumerate(lines)) {}
     return s;
 }
@@ -51,7 +51,7 @@ AOC_SOLUTION($year, $day, a, i64) {
 AOC_SOLUTION($year, $day, b, i64) {
     auto lines = input | splitv("\n"_tsv);
 
-    auto s = 0;
+    auto s = 0_i64;
     for (auto [row, line] : enumerate(lines)) {}
     return s;
 }

@@ -156,17 +156,33 @@ namespace aoc::detail {
 template<di::concepts::Integral T>
 struct ParseIFunction : di::function::pipeline::EnablePipeline {
     template<typename U>
+    requires(di::concepts::ContainerOf<U, char>)
     constexpr auto operator()(U&& input) const {
         auto string = di::forward<U>(input) | di::to<di::Vector>() | di::to<Ts>();
         return di::parser::parse<T>(string.view()).optional_value();
+    }
+
+    template<typename U>
+    requires(di::concepts::ContainerOf<U, c32>)
+    constexpr auto operator()(U&& input) const {
+        auto string = di::forward<U>(input) | di::to<di::Vector>() | di::to<di::String>();
+        return di::parser::parse_unchecked<T>(string);
     }
 };
 
 template<di::concepts::Integral T>
 struct ParseUncheckedIFunction : di::function::pipeline::EnablePipeline {
     template<typename U>
+    requires(di::concepts::ContainerOf<U, char>)
     constexpr auto operator()(U&& input) const {
         auto string = di::forward<U>(input) | di::to<di::Vector>() | di::to<Ts>();
+        return di::parser::parse_unchecked<T>(string);
+    }
+
+    template<typename U>
+    requires(di::concepts::ContainerOf<U, c32>)
+    constexpr auto operator()(U&& input) const {
+        auto string = di::forward<U>(input) | di::to<di::Vector>() | di::to<di::String>();
         return di::parser::parse_unchecked<T>(string);
     }
 };
@@ -178,8 +194,8 @@ constexpr inline auto parse_i = aoc::detail::ParseIFunction<T> {};
 template<di::concepts::Integral T>
 constexpr inline auto uparse_i = aoc::detail::ParseUncheckedIFunction<T> {};
 
-constexpr inline auto parse_int = parse_i<i32>;
-constexpr inline auto uparse_int = uparse_i<i32>;
+constexpr inline auto parse_int = parse_i<i64>;
+constexpr inline auto uparse_int = uparse_i<i64>;
 
 namespace aoc::detail {
 struct SplitTwo {
