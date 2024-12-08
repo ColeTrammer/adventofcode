@@ -21,6 +21,7 @@ struct Args {
     int day { 1 };
     bool part_b { false };
     bool test { false };
+    bool verbose { false };
     bool list { false };
     bool help { false };
 
@@ -32,6 +33,7 @@ struct Args {
             .option<&Args::part_b>('b', "part-b"_tsv, "Run part b"_sv)
             .option<&Args::test>('t', "test"_tsv, "Run with test input"_sv)
             .option<&Args::list>('l', "list"_tsv, "List all available solutions"_sv)
+            .option<&Args::verbose>('v', "verbose"_tsv, "Print verbose information for some solutions"_sv)
             .help();
     }
 };
@@ -89,7 +91,7 @@ di::Result<void> main(Args& args) {
         return di::Unexpected(di::BasicError::InvalidArgument);
     }
 
-    (*solver)(view, args.test);
+    (*solver)(view, args.test, args.verbose);
     return {};
 }
 }

@@ -2,12 +2,11 @@
 
 #include "di/container/string/string_view.h"
 #include "di/container/tree/tree_map.h"
-#include "dius/print.h"
 
 namespace aoc {
 class AocProblemRegistry {
 private:
-    using Function = void (*)(di::TransparentStringView, bool);
+    using Function = void (*)(di::TransparentStringView, bool, bool);
     using Key = di::Tuple<int, int, bool>;
 
 public:
@@ -29,15 +28,15 @@ private:
 };
 
 #define AOC_SOLUTION(year, day, part, Ret)                                                                             \
-    static Ret solve_##year##_##day##_##part(di::TransparentStringView, bool);                                         \
+    static Ret solve_##year##_##day##_##part(di::TransparentStringView, bool, bool);                                   \
     static __attribute__((constructor)) void __registersolve_##year##_##day##_##part() {                               \
         aoc::AocProblemRegistry::the().register_solver(                                                                \
             { year, day, "" #part ""_tsv == "a"_tsv ? false : true },                                                  \
-            [](di::TransparentStringView view, bool is_test) {                                                         \
-                auto result = solve_##year##_##day##_##part(view, is_test);                                            \
+            [](di::TransparentStringView view, bool is_test, bool verbose) {                                           \
+                auto result = solve_##year##_##day##_##part(view, is_test, verbose);                                   \
                 dius::println("" #year " day {} part " #part ": {}"_sv, di::parse_unchecked<i32>(""_sv #day), result); \
             });                                                                                                        \
     }                                                                                                                  \
     static Ret solve_##year##_##day##_##part([[maybe_unused]] di::TransparentStringView input,                         \
-                                             [[maybe_unused]] bool is_test)
+                                             [[maybe_unused]] bool is_test, [[maybe_unused]] bool verbose)
 }
