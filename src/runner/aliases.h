@@ -53,6 +53,9 @@ using MultiSet = di::TreeMultiSet<T>;
 using Ts = di::TransparentString;
 using Tsv = di::TransparentStringView;
 
+using Coord = di::Tuple<usize, usize>;
+using ICoord = di::Tuple<i64, i64>;
+
 constexpr inline auto is_digit = di::piped('0'_mc - '9'_mc);
 constexpr inline auto is_alpha = di::piped('a'_mc - 'z'_mc || 'A'_mc - 'Z'_mc);
 constexpr inline auto is_alnum = di::piped('0'_mc - '9'_mc || 'a'_mc - 'z'_mc || 'A'_mc - 'Z'_mc);

@@ -7,9 +7,8 @@ using namespace dius;
 AOC_SOLUTION(2024, 8, a, i64) {
     auto lines = input | splitv("\n"_tsv);
 
-    using P = Tuple<usize, usize>;
-    auto m = Map<char, Vector<P>> {};
-    auto set = Set<P> {};
+    auto m = Map<char, Vector<Coord>> {};
+    auto set = Set<Coord> {};
     for (auto [row, line] : enumerate(lines)) {
         for (auto [col, ch] : enumerate(line)) {
             if (ch != '.') {
@@ -47,9 +46,8 @@ AOC_SOLUTION(2024, 8, a, i64) {
 AOC_SOLUTION(2024, 8, b, i64) {
     auto lines = input | splitv("\n"_tsv);
 
-    using P = Tuple<usize, usize>;
-    auto m = Map<char, Vector<P>> {};
-    auto set = Set<P> {};
+    auto m = Map<char, Vector<Coord>> {};
+    auto set = Set<Coord> {};
     for (auto [row, line] : enumerate(lines)) {
         for (auto [col, ch] : enumerate(line)) {
             if (ch != '.') {
