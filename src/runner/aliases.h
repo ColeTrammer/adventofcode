@@ -1,39 +1,39 @@
 #pragma once
 
-#include "di/container/concepts/container.h"
-#include "di/container/concepts/container_of.h"
-#include "di/container/concepts/random_access_container.h"
-#include "di/container/concepts/sized_container.h"
-#include "di/container/interface/access.h"
-#include "di/container/interface/empty.h"
-#include "di/container/meta/container_reference.h"
-#include "di/container/prelude.h"
-#include "di/container/string/string.h"
-#include "di/container/tree/tree_map.h"
-#include "di/container/tree/tree_multimap.h"
-#include "di/container/tree/tree_multiset.h"
-#include "di/container/tree/tree_set.h"
-#include "di/container/vector/vector.h"
-#include "di/container/view/pairwise.h"
-#include "di/container/view/single.h"
-#include "di/container/view/zip.h"
-#include "di/container/view/zip_transform.h"
-#include "di/function/curry_back.h"
-#include "di/function/equal_or_greater.h"
-#include "di/function/equal_or_less.h"
-#include "di/function/generator.h"
-#include "di/function/invoke.h"
-#include "di/function/not_fn.h"
-#include "di/function/pipeable.h"
-#include "di/function/piped.h"
-#include "di/function/proj.h"
-#include "di/meta/core.h"
-#include "di/meta/language.h"
-#include "di/meta/util.h"
-#include "di/parser/integral_set.h"
-#include "di/parser/parse_unchecked.h"
-#include "di/util/to_owned.h"
-#include "dius/print.h"
+#include "di/container/concepts/container.h"               // IWYU pragma: export
+#include "di/container/concepts/container_of.h"            // IWYU pragma: export
+#include "di/container/concepts/random_access_container.h" // IWYU pragma: export
+#include "di/container/concepts/sized_container.h"         // IWYU pragma: export
+#include "di/container/interface/access.h"                 // IWYU pragma: export
+#include "di/container/interface/empty.h"                  // IWYU pragma: export
+#include "di/container/meta/container_reference.h"         // IWYU pragma: export
+#include "di/container/prelude.h"                          // IWYU pragma: export
+#include "di/container/string/string.h"                    // IWYU pragma: export
+#include "di/container/tree/tree_map.h"                    // IWYU pragma: export
+#include "di/container/tree/tree_multimap.h"               // IWYU pragma: export
+#include "di/container/tree/tree_multiset.h"               // IWYU pragma: export
+#include "di/container/tree/tree_set.h"                    // IWYU pragma: export
+#include "di/container/vector/vector.h"                    // IWYU pragma: export
+#include "di/container/view/pairwise.h"                    // IWYU pragma: export
+#include "di/container/view/single.h"                      // IWYU pragma: export
+#include "di/container/view/zip.h"                         // IWYU pragma: export
+#include "di/container/view/zip_transform.h"               // IWYU pragma: export
+#include "di/function/curry_back.h"                        // IWYU pragma: export
+#include "di/function/equal_or_greater.h"                  // IWYU pragma: export
+#include "di/function/equal_or_less.h"                     // IWYU pragma: export
+#include "di/function/generator.h"                         // IWYU pragma: export
+#include "di/function/invoke.h"                            // IWYU pragma: export
+#include "di/function/not_fn.h"                            // IWYU pragma: export
+#include "di/function/pipeable.h"                          // IWYU pragma: export
+#include "di/function/piped.h"                             // IWYU pragma: export
+#include "di/function/proj.h"                              // IWYU pragma: export
+#include "di/meta/core.h"                                  // IWYU pragma: export
+#include "di/meta/language.h"                              // IWYU pragma: export
+#include "di/meta/util.h"                                  // IWYU pragma: export
+#include "di/parser/integral_set.h"                        // IWYU pragma: export
+#include "di/parser/parse_unchecked.h"                     // IWYU pragma: export
+#include "di/util/to_owned.h"                              // IWYU pragma: export
+#include "dius/print.h"                                    // IWYU pragma: export
 
 template<typename T>
 using Vec = di::Vector<T>;
