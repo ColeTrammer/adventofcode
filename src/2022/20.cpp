@@ -1,5 +1,5 @@
-#include <di/container/linked/linked_list.h>
-#include <runner/aoc_problem_registry.h>
+#include "di/container/linked/linked_list.h"
+#include "runner/aoc_problem_registry.h"
 
 AOC_SOLUTION(2022, 20, a, i32) {
     auto numbers = input | di::split('\n') | di::transform(di::parse_unchecked<i32>) | di::to<di::LinkedList>();

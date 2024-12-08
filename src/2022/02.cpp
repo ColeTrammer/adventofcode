@@ -1,4 +1,4 @@
-#include <runner/aoc_problem_registry.h>
+#include "runner/aoc_problem_registry.h"
 
 static int score(char opp, char me) {
     auto their_choice = opp - 'A';

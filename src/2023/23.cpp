@@ -1,19 +1,19 @@
-#include <di/assert/assert_binary.h>
-#include <di/container/interface/empty.h>
-#include <di/container/tree/tree_map.h>
-#include <di/container/tree/tree_multimap.h>
-#include <di/container/tree/tree_multiset.h>
-#include <di/container/tree/tree_set.h>
-#include <di/container/vector/static_vector.h>
-#include <di/container/view/zip.h>
-#include <di/container/view/zip_transform.h>
-#include <di/function/container/prelude.h>
-#include <di/function/not_fn.h>
-#include <di/function/ycombinator.h>
-#include <di/math/abs_diff.h>
-#include <dius/print.h>
-#include <runner/aliases.h>
-#include <runner/aoc_problem_registry.h>
+#include "di/assert/assert_binary.h"
+#include "di/container/interface/empty.h"
+#include "di/container/tree/tree_map.h"
+#include "di/container/tree/tree_multimap.h"
+#include "di/container/tree/tree_multiset.h"
+#include "di/container/tree/tree_set.h"
+#include "di/container/vector/static_vector.h"
+#include "di/container/view/zip.h"
+#include "di/container/view/zip_transform.h"
+#include "di/function/container/prelude.h"
+#include "di/function/not_fn.h"
+#include "di/function/ycombinator.h"
+#include "di/math/abs_diff.h"
+#include "dius/print.h"
+#include "runner/aliases.h"
+#include "runner/aoc_problem_registry.h"
 
 using namespace di;
 using namespace dius;

@@ -1,23 +1,23 @@
-#include <di/container/algorithm/max.h>
-#include <di/container/algorithm/minmax.h>
-#include <di/container/algorithm/product.h>
-#include <di/container/interface/empty.h>
-#include <di/container/interface/erase.h>
-#include <di/container/queue/queue.h>
-#include <di/container/tree/tree_map.h>
-#include <di/container/tree/tree_multimap.h>
-#include <di/container/tree/tree_multiset.h>
-#include <di/container/tree/tree_set.h>
-#include <di/container/view/zip.h>
-#include <di/container/view/zip_transform.h>
-#include <di/function/container/function.h>
-#include <di/function/not_fn.h>
-#include <di/function/ycombinator.h>
-#include <di/random/concepts/uniform_random_bit_generator.h>
-#include <di/random/distribution/uniform_int_distribution.h>
-#include <dius/print.h>
-#include <runner/aliases.h>
-#include <runner/aoc_problem_registry.h>
+#include "di/container/algorithm/max.h"
+#include "di/container/algorithm/minmax.h"
+#include "di/container/algorithm/product.h"
+#include "di/container/interface/empty.h"
+#include "di/container/interface/erase.h"
+#include "di/container/queue/queue.h"
+#include "di/container/tree/tree_map.h"
+#include "di/container/tree/tree_multimap.h"
+#include "di/container/tree/tree_multiset.h"
+#include "di/container/tree/tree_set.h"
+#include "di/container/view/zip.h"
+#include "di/container/view/zip_transform.h"
+#include "di/function/container/function.h"
+#include "di/function/not_fn.h"
+#include "di/function/ycombinator.h"
+#include "di/random/concepts/uniform_random_bit_generator.h"
+#include "di/random/distribution/uniform_int_distribution.h"
+#include "dius/print.h"
+#include "runner/aliases.h"
+#include "runner/aoc_problem_registry.h"
 
 using namespace di;
 using namespace dius;

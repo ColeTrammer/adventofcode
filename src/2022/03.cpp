@@ -1,7 +1,7 @@
-#include <di/container/algorithm/fold_left_first.h>
-#include <di/container/tree/tree_set.h>
-#include <di/function/bit_and.h>
-#include <runner/aoc_problem_registry.h>
+#include "di/container/algorithm/fold_left_first.h"
+#include "di/container/tree/tree_set.h"
+#include "di/function/bit_and.h"
+#include "runner/aoc_problem_registry.h"
 
 static int prio(char value) {
     if (('a'_mc - 'z'_mc)(value)) {

@@ -25,17 +25,8 @@ mkdir -p "$project_root/src/$year"
 
 echo "Creating source file '$project_root/$source_file'..."
 cat >"$project_root/$source_file" <<__EOF__
-#include <di/container/interface/empty.h>
-#include <di/container/tree/tree_map.h>
-#include <di/container/tree/tree_multimap.h>
-#include <di/container/tree/tree_multiset.h>
-#include <di/container/tree/tree_set.h>
-#include <di/function/not_fn.h>
-#include <di/container/view/zip_transform.h>
-#include <di/container/view/zip.h>
-#include <dius/print.h>
-#include <runner/aliases.h>
-#include <runner/aoc_problem_registry.h>
+#include "runner/aliases.h"
+#include "runner/aoc_problem_registry.h"
 
 using namespace di;
 using namespace dius;
@@ -44,7 +35,9 @@ AOC_SOLUTION($year, $day, a, i64) {
     auto lines = input | splitv("\n"_tsv);
 
     auto s = 0_i64;
-    for (auto [row, line] : enumerate(lines)) {}
+    for (auto [row, line] : enumerate(lines)) {
+
+    }
     return s;
 }
 
@@ -52,7 +45,9 @@ AOC_SOLUTION($year, $day, b, i64) {
     auto lines = input | splitv("\n"_tsv);
 
     auto s = 0_i64;
-    for (auto [row, line] : enumerate(lines)) {}
+    for (auto [row, line] : enumerate(lines)) {
+
+    }
     return s;
 }
 __EOF__

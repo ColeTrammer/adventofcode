@@ -1,7 +1,7 @@
-#include <di/container/interface/empty.h>
-#include <di/function/not_fn.h>
-#include <dius/print.h>
-#include <runner/aoc_problem_registry.h>
+#include "di/container/interface/empty.h"
+#include "di/function/not_fn.h"
+#include "dius/print.h"
+#include "runner/aoc_problem_registry.h"
 
 AOC_SOLUTION(2019, 01, a, i32) {
     auto lines = input | di::split('\n') | di::filter(di::not_fn(di::empty));
