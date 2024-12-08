@@ -15,10 +15,10 @@ project_root=$(realpath "$script_dir/..")
 year=$1
 day=$2
 
-source_file=$(printf "src/%s/%02d.cpp" "$year" "$day")
-input_dir="input/$year"
-input_file=$(printf "input_%02d.txt" "$day")
-test_file=$(printf "test_%02d.txt" "$day")
+source_file="$(printf "src/%s/%02d.cpp" "$year" "$day")"
+input_dir="$(printf "input/%d/%02d" "$year" "$day")"
+input_file="input.txt"
+test_file="test_00.txt"
 
 echo "Creating source dir '$project_root/src/$year'..."
 mkdir -p "$project_root/src/$year"

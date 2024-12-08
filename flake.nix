@@ -85,6 +85,7 @@
                   pkgs."clang-tools_${llvmVersion}"
                   pkgs.jq
                   pkgs.just
+                  pkgs.html-xml-utils
                 ]
                 ++ [
                   pkgs."clang_${llvmVersion}"

@@ -19,8 +19,8 @@ project_root=$(realpath "$script_dir/..")
 year=$1
 day=$2
 
-input_dir="input/$year"
-file_name=$(printf "input_%02d.txt" "$day")
+input_dir="$(printf "input/%d/%02d" "$year" "$day")"
+file_name="input.txt"
 output_path="$project_root/$input_dir/$file_name"
 mkdir -p "$project_root/$input_dir"
 

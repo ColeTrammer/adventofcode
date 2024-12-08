@@ -47,6 +47,9 @@ while read -r line; do
         if [ "$part" = "a" ]; then
             echo 'Opening part 2...'
             "$script_dir/open.sh" "$year" "$day" "b"
+
+            echo "Download new test input for part 2..."
+            "$script_dir/download_test.sh" "$year" "$day"
         fi
     fi
 done

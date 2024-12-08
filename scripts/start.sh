@@ -26,7 +26,8 @@ while true; do
 
     if [ "$hour" -eq 21 ] && [ "$minute" -ge 0 ] && [ "$second" -ge 0 ]; then
         "$script_dir/open.sh" "$year" "$next_day"
-        "$script_dir/download.sh" "$year" "$next_day"
+        "$script_dir/download_input.sh" "$year" "$next_day"
+        "$script_dir/download_test.sh" "$year" "$next_day"
         break
     fi
 

@@ -122,7 +122,8 @@ check_tidy *args="": ensure_configured
 
 # Add a new solution, open the problem, and download the input.
 init year day:
-    ./scripts/download.sh {{ year }} {{ day }}
+    ./scripts/download_input.sh {{ year }} {{ day }}
+    ./scripts/download_test.sh {{ year }} {{ day }}
     ./scripts/new.sh {{ year }} {{ day }}
     ./scripts/open.sh {{ year }} {{ day }}
 

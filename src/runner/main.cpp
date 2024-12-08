@@ -20,7 +20,7 @@ struct Args {
     int year { 2024 };
     int day { 1 };
     bool part_b { false };
-    bool test { false };
+    di::Optional<i32> test;
     bool verbose { false };
     bool list { false };
     bool help { false };
@@ -31,7 +31,7 @@ struct Args {
             .option<&Args::year>('y', "year"_tsv, "Year to solve"_sv)
             .option<&Args::day>('d', "day"_tsv, "Day to solve"_sv)
             .option<&Args::part_b>('b', "part-b"_tsv, "Run part b"_sv)
-            .option<&Args::test>('t', "test"_tsv, "Run with test input"_sv)
+            .option<&Args::test>('t', "test"_tsv, "Run with test input file number"_sv)
             .option<&Args::list>('l', "list"_tsv, "List all available solutions"_sv)
             .option<&Args::verbose>('v', "verbose"_tsv, "Print verbose information for some solutions"_sv)
             .help();
@@ -68,8 +68,8 @@ di::Result<void> main(Args& args) {
         return list_solutions();
     }
 
-    auto default_path_string =
-        TRY(di::present("input/{}/{}_{:02}.txt"_sv, args.year, args.test ? "test"_sv : "input"_sv, args.day));
+    auto file_name = args.test.has_value() ? TRY(di::present("test_{:02}.txt"_sv, *args.test)) : "input.txt"_s;
+    auto default_path_string = TRY(di::present("input/{}/{:02}/{}"_sv, args.year, args.day, file_name));
     auto default_path_transparent_string = default_path_string | di::transform([](c32 code_point) {
                                                return static_cast<char>(code_point);
                                            }) |
@@ -91,7 +91,7 @@ di::Result<void> main(Args& args) {
         return di::Unexpected(di::BasicError::InvalidArgument);
     }
 
-    (*solver)(view, args.test, args.verbose);
+    (*solver)(view, args.test.has_value(), args.verbose);
     return {};
 }
 }
