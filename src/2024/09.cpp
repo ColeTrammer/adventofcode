@@ -60,8 +60,14 @@ AOC_SOLUTION(2024, 9, a, i64) {
 AOC_SOLUTION(2024, 9, b, i64) {
     auto lines = input | splitv("\n"_tsv);
 
+    struct Interval {
+        i64 id = 0;
+        i64 pos = 0;
+        i64 len = 0;
+    };
+
     auto s = 0_i64;
-    auto v = Vec<Tuple<i64, i64, i64>> {};
+    auto v = Vec<Interval> {};
     auto id = 0_i64;
     auto pos = 0_i64;
     for (auto [row, line] : enumerate(lines)) {
@@ -77,11 +83,11 @@ AOC_SOLUTION(2024, 9, b, i64) {
 
     for (auto fi = v.size() - 1; fi > 0; fi--) {
         for (auto i : range(1lu, fi + 1)) {
-            auto left = tget<1>(v[i - 1]) + tget<2>(v[i - 1]);
-            auto right = tget<1>(v[i]);
+            auto left = v[i - 1].pos + v[i - 1].len;
+            auto right = v[i].pos;
 
-            if (right - left >= tget<2>(v[fi])) {
-                v.insert(v.begin() + i, { tget<0>(v[fi]), left, tget<2>(v[fi]) });
+            if (right - left >= v[fi].len) {
+                v.insert(v.begin() + i, { v[fi].id, left, v[fi].len });
                 v.erase(v.begin() + fi + 1);
                 fi++;
                 break;
@@ -90,11 +96,7 @@ AOC_SOLUTION(2024, 9, b, i64) {
     }
 
     for (auto [id, pos, l] : v) {
-        while (l > 0) {
-            s += id * pos;
-            pos++;
-            l--;
-        }
+        s += id * (pos * l + ((l - 1) * l / 2));
     }
 
     return s;
