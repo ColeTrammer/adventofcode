@@ -21,7 +21,7 @@ AOC_SOLUTION(2023, 9, a, i64) {
     for (auto [row, line] : enumerate(lines)) {
         auto nums = all_nums(line);
 
-        auto diffs = Vector<Vector<i32>> {};
+        auto diffs = Vector<Vector<i64>> {};
         diffs.push_back(di::clone(nums));
 
         while (!all_of(last(diffs), equal(0))) {
@@ -41,7 +41,7 @@ AOC_SOLUTION(2023, 9, b, i64) {
     for (auto [row, line] : enumerate(lines)) {
         auto nums = all_nums(line);
 
-        auto diffs = Vector<Vector<i32>> {};
+        auto diffs = Vector<Vector<i64>> {};
         diffs.push_back(di::clone(nums));
 
         while (!all_of(last(diffs), equal(0))) {

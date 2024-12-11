@@ -253,7 +253,7 @@ struct AllNums {
 };
 }
 
-constexpr inline auto all_nums = di::curry_back(aoc::detail::AllNums<int> {}, di::c_<2zu>);
+constexpr inline auto all_nums = di::curry_back(aoc::detail::AllNums<i64> {}, di::c_<2zu>);
 
 template<typename I>
 constexpr inline auto all_nums_i = di::curry_back(aoc::detail::AllNums<I> {}, di::c_<2zu>);

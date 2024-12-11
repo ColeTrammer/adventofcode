@@ -9,13 +9,15 @@ AOC_SOLUTION(2024, 11, a, i64) {
 
     auto s = 0_i64;
     for (auto [row, line] : enumerate(lines)) {
-        auto stones = all_nums_i<i64>(line) | to<LinkedList>();
+        auto stones = all_nums_i<i64>(line);
 
         for (auto _ : range(is_test ? 6 : 25)) {
+            auto new_stones = Vec<i64> {};
+            new_stones.reserve(2 * stones.size());
             for (auto it = stones.begin(); it != stones.end(); ++it) {
                 auto& stone = *it;
                 if (stone == 0) {
-                    stone = 1;
+                    new_stones.push_back(1);
                     continue;
                 }
 
@@ -28,12 +30,13 @@ AOC_SOLUTION(2024, 11, a, i64) {
 
                     auto a = stone / l;
                     auto b = stone % l;
-                    stones.insert(it, b);
-                    stone = a;
+                    new_stones.push_back(b);
+                    new_stones.push_back(a);
                 } else {
-                    stone *= 2024;
+                    new_stones.push_back(stone * 2024);
                 }
             }
+            stones = di::move(new_stones);
         }
 
         s += stones.size();
