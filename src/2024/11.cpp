@@ -21,17 +21,13 @@ AOC_SOLUTION(2024, 11, a, i64) {
                     continue;
                 }
 
-                auto s = to_string(stone);
-                if (s.size_code_units() % 2 == 0) {
-                    auto l = 1;
-                    for (auto _ : range(s.size_code_units() / 2)) {
-                        l *= 10;
-                    }
+                auto s = to_string(stone) | to_ts;
+                if (s.size() % 2 == 0) {
+                    auto as = s.substr(0, s.size() / 2);
+                    auto bs = s.substr(s.size() / 2);
 
-                    auto a = stone / l;
-                    auto b = stone % l;
-                    new_stones.push_back(b);
-                    new_stones.push_back(a);
+                    new_stones.push_back(uparse_int(as));
+                    new_stones.push_back(uparse_int(bs));
                 } else {
                     new_stones.push_back(stone * 2024);
                 }

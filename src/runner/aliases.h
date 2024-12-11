@@ -265,14 +265,33 @@ constexpr inline auto access = di::at_unchecked;
 }
 
 namespace aoc::detail {
+struct ToTS : di::function::pipeline::EnablePipeline {
+    template<di::concepts::ContainerOf<byte> T>
+    constexpr static auto operator()(T&& container) {
+        return di::forward<T>(container) | di::transform([](byte byte) {
+                   return di::to_integer<char>(byte);
+               }) |
+               di::to<di::Vector>() | di::to<di::TransparentString>();
+    }
+
+    template<di::concepts::ContainerOf<c32> T>
+    constexpr static auto operator()(T&& container) {
+        return di::forward<T>(container) | di::transform([](c32 x) {
+                   return char(x);
+               }) |
+               di::to<di::Vector>() | di::to<di::TransparentString>();
+    }
+};
+}
+
+constexpr inline auto to_ts = aoc::detail::ToTS {};
+
+namespace aoc::detail {
 inline auto read_to_string(di::PathView path) -> di::Result<di::TransparentString> {
     auto file = TRY(dius::open_sync(path, dius::OpenMode::Readonly));
     auto bytes = TRY(di::read_all(file));
 
-    return bytes | di::transform([](byte byte) {
-               return di::to_integer<char>(byte);
-           }) |
-           di::to<di::Vector>() | di::to<di::TransparentString>();
+    return bytes | to_ts;
 }
 }
 
