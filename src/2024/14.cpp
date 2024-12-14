@@ -67,7 +67,7 @@ AOC_SOLUTION(2024, 14, b, i64) {
     i64 W = is_test ? 11 : 101;
     i64 H = is_test ? 7 : 103;
 
-    for (i64 T = 391;; T += 101) {
+    for (i64 T = 0; T < 20000; T++) {
         auto ps = Map<Coord, usize> {};
         for (auto [row, line] : enumerate(lines)) {
             auto [axs, ays] = split_two(line.view(), " "_tsv);
@@ -91,20 +91,12 @@ AOC_SOLUTION(2024, 14, b, i64) {
             ps[{ fy, fx }]++;
         }
 
-        println("=========== {} ======================================"_sv, T);
-        for (auto r : range(H)) {
-            for (auto c : range(W)) {
-                if (ps[{ r, c }]) {
-                    print("{}"_sv, ps[{ r, c }]);
-                } else {
-                    print("."_sv);
-                }
-            }
-            println(""_sv);
+        // Incidentally, the christmas tree appears when all robots have
+        // a unique position.
+        if (all_of(values(ps), equal(1))) {
+            return T;
         }
-
-        auto b = Array { 0_b };
-        (void) dius::stdin.read_some(b.span());
     }
+
     return 0;
 }
