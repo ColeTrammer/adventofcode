@@ -24,6 +24,15 @@ mkdir -p "$project_root/$output_dir"
 
 url="https://adventofcode.com/$year/day/$day"
 
+unescape() {
+    while read -r lin; do
+        newl=${lin//&gt;/>}
+        newl=${newl//&lt;/<}
+        newl=${newl//&amp;/<}
+        echo "$newl"
+    done
+}
+
 split_sections() {
     counter=0
 
@@ -32,7 +41,7 @@ split_sections() {
             file_path="$(printf "%s/%s/test_%02d.txt" "$project_root" "$output_dir" "$counter")"
 
             echo "Saving test input 'test_$(printf "%02d" "$counter")' to '$file_path'..."
-            echo -n "$block" | sed -Ez '$ s/\n+$//' >"$file_path"
+            echo -n "$block" | unescape | sed -Ez '$ s/\n+$//' >"$file_path"
 
             counter=$((counter + 1))
             block=""
