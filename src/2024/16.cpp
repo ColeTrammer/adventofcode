@@ -88,7 +88,6 @@ AOC_SOLUTION(2024, 16, a, i64) {
 AOC_SOLUTION(2024, 16, b, i64) {
     auto lines = input | splitv("\n"_tsv);
 
-    auto s = 0_i64;
     auto srow = 0_usize;
     auto scol = 0_usize;
     auto erow = 0_usize;
@@ -175,6 +174,19 @@ AOC_SOLUTION(2024, 16, b, i64) {
         add({ state.score + 1000, clone(state.tiles), state.row, state.col, -state.dc, -state.dr });
 
         add({ state.score + 1, clone(state.tiles), state.row + state.dr, state.col + state.dc, state.dr, state.dc });
+    }
+
+    if (verbose) {
+        for (auto r : range(lines.size())) {
+            for (auto c : range(lines[r].size())) {
+                auto ch = lines[r][c];
+                if (fset.contains({ r, c })) {
+                    ch = 'O';
+                }
+                print("{}"_sv, ch);
+            }
+            println(""_sv);
+        }
     }
 
     return fset.size();
