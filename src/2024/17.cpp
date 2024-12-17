@@ -206,7 +206,7 @@ AOC_SOLUTION(2024, 17, b, u64) {
                     case 5: {
                         auto out = get_combo() % 8;
                         if (out == target) {
-                            result.push_back({ a, b, c });
+                            result.push_back({ a_high << 3 | candidate, b, c });
                         }
                         ip = program.size();
                         break;
