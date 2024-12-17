@@ -6,7 +6,7 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 | Year | Language | Number of Problems Solved | Score |
 | ---- | -------- | ------------------------- | ----- |
-| 2024 | C++      | 16/25                     | 0     |
+| 2024 | C++      | 17/25                     | 0     |
 | 2023 | C++      | 25/25                     | 91    |
 | 2022 | Rust     | 25/25                     | 0     |
 | 2021 | Rust     | 8/25                      | 0     |
@@ -19,6 +19,7 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 | Day | **Part A** | Time     | Rank | Score | **Part B** | Time     | Rank | Score |
 | --- | ---------- | -------- | ---- | ----- | ---------- | -------- | ---- | ----- |
+| 17  |            | 00:22:54 | 1329 | 0     |            | 01:19:58 | 532  | 0     |
 | 16  |            | 00:12:34 | 669  | 0     |            | 00:55:36 | 1590 | 0     |
 | 15  |            | 00:13:41 | 353  | 0     |            | 01:12:24 | 1486 | 0     |
 | 14  |            | 00:24:05 | 2643 | 0     |            | 00:39:10 | 1295 | 0     |
