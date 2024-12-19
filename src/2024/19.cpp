@@ -42,11 +42,6 @@ AOC_SOLUTION(2024, 19, b, i64) {
     auto avail = groups[0] | split(", "_tsv) | to<Vec<Tsv>>();
     auto patterns = groups[1] | split("\n"_tsv);
 
-    auto ll = Map<char, Vec<Tsv>> {};
-    for (auto const& s : avail) {
-        ll[s[0]].push_back(s);
-    }
-
     auto s = 0_i64;
     for (auto [row, line] : enumerate(patterns)) {
         auto possible = Vec<i64> {};
@@ -54,7 +49,7 @@ AOC_SOLUTION(2024, 19, b, i64) {
         *possible.back() = 1;
 
         for (auto i : range(line.size()) | reverse) {
-            for (auto s : ll[line[i]]) {
+            for (auto s : avail) {
                 if (line.substr(i).starts_with(s)) {
                     possible[i] += possible[i + s.size()];
                 }
