@@ -51,7 +51,7 @@ AOC_SOLUTION(2024, 23, b, Ts) {
 
     Set<Tsv> res;
     Set<Set<Tsv>> memo;
-    auto dfs = [&](this auto&& dfs, Tsv node, Set<Tsv>& vis) -> void {
+    auto dfs = ycombinator([&](auto&& dfs, Tsv node, Set<Tsv>& vis) -> void {
         if (memo.contains(vis)) {
             return;
         }
@@ -74,10 +74,10 @@ AOC_SOLUTION(2024, 23, b, Ts) {
             }
 
             vis.insert(cand.view());
-            dfs(cand, vis);
+            dfs(cand.view(), vis);
             vis.erase(cand.view());
         }
-    };
+    });
 
     for (auto const& key : keys(g)) {
         auto vis = Set<Tsv> {};
